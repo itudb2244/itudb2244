@@ -1,5 +1,4 @@
 PersonID,FullName,LogonName,HashedPassword,IsSystemUser,IsEmployee,IsSalesperson,PhoneNumber,EmailAddress
-1,Data Conversion Only,NO LOGON,NULL,0,0,0,NULL,NULL
 2,Kayla Woodcock,kaylaw@wideworldimporters.com,0x616E9B558976525E7F14D780EBAE80C68586958DC97C506DB418E2E2C49E340E,1,1,1,(415) 555-0102,kaylaw@wideworldimporters.com
 3,Hudson Onslow,hudsono@wideworldimporters.com,0x23668CCC579015EA934736C3D7B87E86360EB5EEE164C4368A7B103C11E3436E,1,1,1,(415) 555-0102,hudsono@wideworldimporters.com
 4,Isabella Rupp,isabellar@wideworldimporters.com,0xB45E7C4E37C32FA9A5A3161B9DB1C9C1E787BB7DB424E7FD7A20895D4BFB5D31,1,1,0,(415) 555-0102,isabellar@wideworldimporters.com
