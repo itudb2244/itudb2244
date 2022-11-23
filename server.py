@@ -6,7 +6,7 @@ def create_app():
     app.config.from_object("settings")
 
     app.add_url_rule("/", view_func=views.home_page)
-    app.add_url_rule("/consumers", view_func=views.consumers_page)
+    app.add_url_rule("/customers", view_func=views.customers_page)
 
     app.config["dbname"] = "import_test.db"
 
