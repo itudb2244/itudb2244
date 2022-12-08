@@ -32,10 +32,10 @@ class InvoiceLines():
         self.ExtendedPrice =ExtendedPrice
 
 class Invoices():
-    def __init__(self, CustomerID, CustomerName, PrimaryContactPersonID, PhoneNumber, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2):
+    def __init__(self, InvoiceID,CustomerID,OrderID,ContactPersonID,AccountsPersonID,InvoiceDate,CustomerPurchaseOrderNumber,DeliveryInstructions,InternalComments,DeliveryRun,RunPosition,ReturnedDeliveryData,ConfirmedDeliveryTime,ConfirmedReceivedBy):
         self.InvoiceID = InvoiceID
         self.CustomerID = CustomerID
-        self.OrderID = CustomerName
+        self.OrderID = OrderID
         self.ContactPersonID = ContactPersonID
         self.AccountsPersonID = AccountsPersonID
         self.InvoiceDate = InvoiceDate
