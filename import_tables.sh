@@ -4,112 +4,112 @@ cd Tables
 rm ../import_test.db
     sqlite3 ../import_test.db << EOF
 create table People(
-PersonID INTEGER PRIMARY KEY,
+PersonID INT PRIMARY KEY,
 FullName TEXT,
 LogonName TEXT,
 HashedPassword TEXT,
-IsSystemUser INTEGER,
-IsEmployee INTEGER,
-IsSalesperson INTEGER,
+IsSystemUser INT,
+IsEmployee INT,
+IsSalesperson INT,
 PhoneNumber TEXT,
 EmailAddress TEXT);
 
 create table StockItems(
-StockItemID INTEGER PRIMARY KEY,
+StockItemID INT PRIMARY KEY,
 StockItemName TEXT,
-LeadTimeDays INTEGER,
+LeadTimeDays INT,
 UnitPrice REAL,
 RecommendedRetailPrice REAL
 );
 
 create table Customers(
-CustomerID INTEGER PRIMARY KEY,
+CustomerID INT PRIMARY KEY,
 CustomerName TEXT,
-PrimaryContactPersonID INTEGER REFERENCES People(PersonID),
-PhoneNumber INTEGER,
+PrimaryContactPersonID INT REFERENCES People(PersonID),
+PhoneNumber INT,
 WebsiteURL TEXT,
 DeliveryAddressLine1 TEXT,
 DeliveryAddressLine2 TEXT);
 
 
 create table InvoiceLines(
-InvoiceLineID INTEGER PRIMARY KEY,
-InvoiceID INTEGER REFERENCES Invoices(InvoiceID),
-StockItemID INTEGER REFERENCES StockItems(StockItemID),
+InvoiceLineID INT PRIMARY KEY,
+InvoiceID INT REFERENCES Invoices(InvoiceID),
+StockItemID INT REFERENCES StockItems(StockItemID),
 Description TEXT,
-Quantity INTEGER,
+Quantity INT,
 UnitPrice REAL,
 LineProfit REAL,
 ExtendedPrice REAL
 );
 
 create table Invoices( 
-InvoiceID INTEGER PRIMARY KEY,
-CustomerID INTEGER REFERENCES Customers(CustomerID),
-OrderID	INTEGER REFERENCES Orders(OrderID),
-ContactPersonID INTEGER REFERENCES People(PersonID),
-AccountsPersonID INTEGER REFERENCES People(PersonID),
+InvoiceID INT PRIMARY KEY,
+CustomerID INT REFERENCES Customers(CustomerID),
+OrderID	INT REFERENCES Orders(OrderID),
+ContactPersonID INT REFERENCES People(PersonID),
+AccountsPersonID INT REFERENCES People(PersonID),
 InvoiceDate TEXT,
-CustomerPurchaseOrderNumber INTEGER,
+CustomerPurchaseOrderNumber INT,
 DeliveryInstructions TEXT,
 InternalComments TEXT,
 DeliveryRun TEXT,
-RunPosition INTEGER,
+RunPosition INT,
 ReturnedDeliveryData TEXT,
 ConfirmedDeliveryTime TEXT,
 ConfirmedReceivedBy TEXT);
 
 create table CustomerTransactions(
-CustomerTransactionID INTEGER PRIMARY KEY,
-CustomerID INTEGER REFERENCES Customers(CustomerID),
-InvoiceID INTEGER REFERENCES Invoices(InvoiceID),
+CustomerTransactionID INT PRIMARY KEY,
+CustomerID INT REFERENCES Customers(CustomerID),
+InvoiceID INT REFERENCES Invoices(InvoiceID),
 TransactionDate TEXT,
 AmountExcludingTax REAL,
 TaxAmount REAL,
 TransactionAmount REAL,
 OutstandingBalance REAL,
 FinalizationDate TEXT,
-IsFinalized INTEGER
+IsFinalized INT
 );
 
 create table OrderLines(
-OrderLineID INTEGER PRIMARY KEY,
-OrderID INTEGER REFERENCES Orders(OrderID),
-StockItemID INTEGER REFERENCES StockItems(StockItemID),
+OrderLineID INT PRIMARY KEY,
+OrderID INT REFERENCES Orders(OrderID),
+StockItemID INT REFERENCES StockItems(StockItemID),
 Description TEXT,
-Quantity INTEGER,
+Quantity INT,
 UnitPrice REAL,
-PickedQuantity INTEGER,
+PickedQuantity INT,
 PickingCompletedWhen TEXT);
 
 create table Orders(
-OrderID INTEGER PRIMARY KEY,
-CustomerID INTEGER REFERENCES Customers(CustomerID),
+OrderID INT PRIMARY KEY,
+CustomerID INT REFERENCES Customers(CustomerID),
 OrderDate TEXT,
 ExpectedDeliveryDate TEXT,
-CustomerPurchaseOrderNumber INTEGER,
-IsUndersupplyBackordered INTEGER,
+CustomerPurchaseOrderNumber INT,
+IsUndersupplyBackordered INT,
 PickingCompletedWhen TEXT
 );
 
 
 create table StockItemHoldings(
-StockItemID INTEGER REFERENCES StockItems(StockItemID),
-QuantityOnHand INTEGER,
+StockItemID INT REFERENCES StockItems(StockItemID),
+QuantityOnHand INT,
 BinLocation TEXT, 
-LastStocktakeQuantity INTEGER,
+LastStocktakeQuantity INT,
 LastCostPrice REAL,
-ReorderLevel INTEGER,
-TargetStockLevel INTEGER);
+ReorderLevel INT,
+TargetStockLevel INT);
 
 
 create table StockItemTransactions(
-StockItemTransactionID INTEGER,
-StockItemID INTEGER REFERENCES StockItems(StockItemID),
-CustomerID INTEGER REFERENCES Customers(CustomerID),
-InvoiceID INTEGER REFERENCES Invoices(InvoiceID),
+StockItemTransactionID INT,
+StockItemID INT REFERENCES StockItems(StockItemID),
+CustomerID INT REFERENCES Customers(CustomerID),
+InvoiceID INT REFERENCES Invoices(InvoiceID),
 TransactionOccurredWhen TEXT,
-Quantity INTEGER
+Quantity INT
 );
 
 EOF

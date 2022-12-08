@@ -1,9 +1,9 @@
 from flask import current_app, render_template
-import services.consumer_service as consumerService
+import services.customer_service as customerService
 
 def home_page():
     return render_template("home.html")
 
-def consumers_page():
-    consumers = consumerService.get_consumers()
-    return render_template("consumers.html", consumers=consumers)
+def customers_page():
+    customers = customerService.get_customers()
+    return render_template("customers.html", customers=customers)
