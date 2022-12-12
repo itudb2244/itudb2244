@@ -61,8 +61,8 @@ ConfirmedReceivedBy TEXT);
 
 create table CustomerTransactions(
 CustomerTransactionID INT PRIMARY KEY,
-CustomerID INT REFERENCES Customers(CustomerID),
-InvoiceID INT REFERENCES Invoices(InvoiceID),
+CustomerID INT REFERENCES Customers(CustomerID) ,
+InvoiceID INT REFERENCES Invoices(InvoiceID) NULL,
 TransactionDate TEXT,
 AmountExcludingTax REAL,
 TaxAmount REAL,

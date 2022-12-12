@@ -7,3 +7,6 @@ def home_page():
 def customers_page():
     customers = customerService.get_customers()
     return render_template("customers.html", customers=customers)
+
+def customer_transactions():
+    customer_transactions 

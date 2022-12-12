@@ -1,5 +1,7 @@
 from flask import Flask
 import views
+from subprocess import call
+import db_updated_check
 
 def create_app():
     app = Flask(__name__)
@@ -12,7 +14,12 @@ def create_app():
 
     return app
 
+def create_db():
+    if db_updated_check.database_date_check():
+        rc = call("./import_tables.sh")
+
 if __name__ == "__main__":
+    create_db()
     app = create_app()
     port = app.config.get("PORT", 5000)
     app.run(port=port)

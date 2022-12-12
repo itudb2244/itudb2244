@@ -3,7 +3,7 @@ import sqlite3
 from models import Customer
 
 def get_customers():
-    query = 'SELECT * FROM Customers'
+    query = 'SELECT * FROM CUSTOMERS'
     customers = []
 
     with sqlite3.connect(current_app.config["dbname"]) as con:
