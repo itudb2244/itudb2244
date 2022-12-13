@@ -1,0 +1,331 @@
+
+   
+    {% extends "layout.html" %}
+    {% block title %}AddCustomers{% endblock %}
+    {% block content %}  
+
+<div class="formbold-main-wrapper">
+        
+
+        <div class="formbold-form-wrapper">
+
+          <h1 class="title">Add Customer</h1>
+       
+          <form  method="POST" action="{{url_for('customers_page')}}">
+            <div class="formbold-input-group">
+              <label for="CustomerName" class="formbold-form-label"> Customer Name </label>
+              <input
+                type="text"
+                name="CustomerName"
+                id="CustomerName"
+                placeholder="Enter customer's name"
+                class="formbold-form-input"
+              />
+            </div>
+
+            
+            <div class="formbold-input-group">
+                <label for="PrimaryContactPersonID" class="formbold-form-label"> Primary Contact Person ID </label>
+                <input
+                  type="text"
+                  name="PrimaryContactPersonID"
+                  id="PrimaryContactPersonID"
+                  placeholder="Enter Primary Contact Person ID"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="PhoneNumber" class="formbold-form-label"> Phone Number </label>
+                <input
+                  type="text"
+                  name="PhoneNumber"
+                  id="PhoneNumber"
+                  placeholder="Enter Phone Number"
+                  class="formbold-form-input"
+                />
+            </div>
+      
+
+            <div class="formbold-input-group">
+                <label for="WebsiteURL" class="formbold-form-label"> Website URL </label>
+                <input
+                  type="text"
+                  name="WebsiteURL"
+                  id="WebsiteURL"
+                  placeholder="Enter Website URL"
+                  class="formbold-form-input"
+                />
+            </div>
+              
+
+            <div>
+                <label for="DeliveryAddressLine1" class="formbold-form-label">
+                Delivery Address Line 1
+                </label>
+                <textarea
+                  rows="1"
+                  name="DeliveryAddressLine1"
+                  id="DeliveryAddressLine1"
+                  placeholder="Address Line"
+                  class="formbold-form-input"
+                ></textarea>
+              </div>
+
+
+            <div>
+                <label for="DeliveryAddressLine2" class="formbold-form-label">
+                Delivery Address Line 2
+                </label>
+                <textarea
+                  rows="1"
+                  name="DeliveryAddressLine2"
+                  id="DeliveryAddressLine2"
+                  placeholder="Address Line"
+                  class="formbold-form-input"
+                ></textarea>
+              </div>
+
+<!--
+
+            <div class="formbold-input-group">
+              <label for="email" class="formbold-form-label"> Email </label>
+              <input
+                type="email"
+                name="lastname"
+                id="email"
+                placeholder="Enter your email"
+                class="formbold-form-input"
+              />
+            </div>
+            
+            
+            <div class="formbold-input-group">
+              <label for="age" class="formbold-form-label"> Age </label>
+              <input
+                type="text"
+                name="age"
+                id="age"
+                placeholder="Enter your age"
+                class="formbold-form-input"
+              />
+            </div>
+      
+            <div class="formbold-input-group">
+              <label class="formbold-form-label">
+                Which option best describes you?
+              </label>
+      
+              <select class="formbold-form-select" name="occupation" id="occupation">
+                <option value="Student">Student</option>
+                <option value="designer">UX/UI Designer</option>
+                <option value="fullstack">Full Stack Developer</option>
+                <option value="frontend">Front End Developer</option>
+              </select>
+            </div>
+      
+            <div class="formbold-input-radio-wrapper">
+              <label for="ans" class="formbold-form-label">
+                Would you recomend our site to a friend?
+              </label>
+      
+              <div class="formbold-radio-flex">
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="ans"
+                      id="ans"
+                    />
+                    Yes
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="ans"
+                      id="ans"
+                    />
+                    No
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="ans"
+                      id="ans"
+                    />
+                    Maybe
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+      
+            <div class="formbold-input-radio-wrapper">
+              <label class="formbold-form-label">
+                Which languages & freameworks you know?
+              </label>
+      
+              <div class="formbold-radio-flex">
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label" for="c">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="c"
+                      id="c"
+                    />
+                    C
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label" for="c++">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="c++"
+                      id="c++"
+                    />
+                    c++
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label" for="java">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="java"
+                      id="java"
+                    />
+                    Java
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label" for="python">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="python"
+                      id="python"
+                    />
+                    Python
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label" for="javaScript">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="javaScript"
+                      id="javaScript"
+                    />
+                    JavaScript
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label" for="react">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="react"
+                      id="react"
+                    />
+                    React
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label" for="angular">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="angular"
+                      id="angular"
+                    />
+                    Angular
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label" for="django">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="django"
+                      id="django"
+                    />
+                    Django
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label" for="tailwind">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="tailwind"
+                      id="tailwind"
+                    />
+                    Tailwind CSS
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+      
+                <div class="formbold-radio-group">
+                  <label class="formbold-radio-label" for="bootstrap">
+                    <input
+                      class="formbold-input-radio"
+                      type="radio"
+                      name="bootstrap"
+                      id="bootstrap"
+                    />
+                    Bootstrap
+                    <span class="formbold-radio-checkmark"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+      
+            <div>
+              <label for="message" class="formbold-form-label">
+                Any comments or suggestions
+              </label>
+              <textarea
+                rows="6"
+                name="message"
+                id="message"
+                placeholder="Type here..."
+                class="formbold-form-input"
+              ></textarea>
+            </div>
+      -->
+            <button class="formbold-btn">Submit</button>
+          </form>
+        </div>
+      </div>
+      
+  
+  {% endblock %}   

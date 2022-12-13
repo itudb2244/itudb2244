@@ -1,0 +1,154 @@
+
+   
+    {% extends "layout.html" %}
+    {% block title %}Add Customer Transactions{% endblock %}
+    {% block content %}  
+
+<div class="formbold-main-wrapper">
+        
+
+        <div class="formbold-form-wrapper">
+
+          <h1 class="title">Add Customer Transactions</h1>
+       
+          <form  method="POST" action="{{url_for('customer_transactions_page')}}">
+
+            <div class="formbold-input-group">
+              <label for="CustomerID" class="formbold-form-label"> Customer ID </label>
+              <input
+                type="text"
+                name="CustomerID"
+                id="CustomerID"
+                placeholder="Enter Customer ID"
+                class="formbold-form-input"
+              />
+            </div>
+
+            
+            <div class="formbold-input-group">
+                <label for="InvoiceID" class="formbold-form-label"> Invoice ID</label>
+                <input
+                  type="text"
+                  name="InvoiceID"
+                  id="InvoiceID"
+                  placeholder="Enter Invoice ID"
+                  class="formbold-form-input"
+                />
+            </div>
+
+
+            <div class="formbold-input-group">
+                <label for="TransactionDate" class="formbold-form-label"> Transaction Date </label>
+                <input
+                  type="text"
+                  name="TransactionDate"
+                  id="TransactionDate"
+                  placeholder="Enter Transaction Date"
+                  class="formbold-form-input"
+                />
+            </div>
+              
+
+            <div class="formbold-input-group">
+                <label for="AmountExcludingTax" class="formbold-form-label"> Amount Excluding Tax </label>
+                <input
+                  type="text"
+                  name="AmountExcludingTax"
+                  id="AmountExcludingTax"
+                  placeholder="Enter Amount Excluding Tax"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="TaxAmount" class="formbold-form-label"> Tax Amount </label>
+                <input
+                  type="text"
+                  name="TaxAmount"
+                  id="TaxAmount"
+                  placeholder="Enter Tax Amount"
+                  class="formbold-form-input"
+                />
+            </div>
+
+
+            <div class="formbold-input-group">
+          
+
+           
+            <div class="formbold-input-group">
+                <label for="TransactionAmount" class="formbold-form-label"> Transaction Amount </label>
+                <input
+                  type="text"
+                  name="TransactionAmount"
+                  id="TransactionAmount"
+                  placeholder="Enter Transaction Amount"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="OutstandingBalance" class="formbold-form-label"> Outstanding Balance </label>
+                <input
+                  type="text"
+                  name="OutstandingBalance"
+                  id="OutstandingBalance"
+                  placeholder="Enter Outstanding Balance"
+                  class="formbold-form-input"
+                />
+            </div>
+            
+            <div class="formbold-input-group">
+                <label for="FinalizationDate" class="formbold-form-label"> Finalization Date</label>
+                <input
+                  type="text"
+                  name="FinalizationDate"
+                  id="FinalizationDate"
+                  placeholder="Enter Finalization Date"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-radio-wrapper">
+                <label for="IsFinalized" class="formbold-form-label">
+                Is Finalized?
+                </label>
+        
+                <div class="formbold-radio-flex">
+                  <div class="formbold-radio-group">
+                    <label class="formbold-radio-label">
+                      <input
+                        class="formbold-input-radio"
+                        type="radio"
+                        name="IsFinalized"
+                        id="IsFinalized"
+                      />
+                      Yes
+                      <span class="formbold-radio-checkmark"></span>
+                    </label>
+                  </div>
+        
+                  <div class="formbold-radio-group">
+                    <label class="formbold-radio-label">
+                      <input
+                        class="formbold-input-radio"
+                        type="radio"
+                        name="IsFinalized"
+                        id="IsFinalized"
+                      />
+                      No
+                      <span class="formbold-radio-checkmark"></span>
+                    </label>
+                  </div>
+        
+                  
+                </div>
+              </div>
+
+            <button class="formbold-btn">Add</button>
+          </form>
+        </div>
+      </div>
+      
+  
+  {% endblock %}   

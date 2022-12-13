@@ -1,0 +1,119 @@
+
+   
+    {% extends "layout.html" %}
+    {% block title %}Add Orders{% endblock %}
+    {% block content %}  
+
+<div class="formbold-main-wrapper">
+        
+
+        <div class="formbold-form-wrapper">
+
+          <h1 class="title">Add Orders</h1>
+       
+          <form  method="POST" action="{{url_for('orders_page')}}">
+            <div class="formbold-input-group">
+              <label for="CustomerID" class="formbold-form-label"> Customer ID </label>
+              <input
+                type="text"
+                name="CustomerID"
+                id="CustomerID"
+                placeholder="Enter Customer ID"
+                class="formbold-form-input"
+              />
+            </div>
+
+            
+            <div class="formbold-input-group">
+                <label for="OrderDate" class="formbold-form-label"> Order Date </label>
+                <input
+                  type="text"
+                  name="OrderDate"
+                  id="OrderDate"
+                  placeholder="Enter Order Date"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="ExpectedDeliveryDate" class="formbold-form-label"> Expected Delivery Date </label>
+                <input
+                  type="text"
+                  name="ExpectedDeliveryDate"
+                  id="ExpectedDeliveryDate"
+                  placeholder="Enter Expected Delivery Date"
+                  class="formbold-form-input"
+                />
+            </div>
+      
+
+            <div class="formbold-input-group">
+                <label for="CustomerPurchaseOrderNumber" class="formbold-form-label"> Customer Purchase Order Number </label>
+                <input
+                  type="number"
+                  name="CustomerPurchaseOrderNumber"
+                  id="CustomerPurchaseOrderNumber"
+                  placeholder="Enter Customer Purchase Order Number"
+                  class="formbold-form-input"
+                />
+            </div>
+              
+
+
+            <div class="formbold-input-radio-wrapper">
+                <label for="IsUndersupplyBackordered" class="formbold-form-label">
+                Is Undersupply Backordered
+                </label>
+        
+                <div class="formbold-radio-flex">
+                  <div class="formbold-radio-group">
+                    <label class="formbold-radio-label">
+                      <input
+                        class="formbold-input-radio"
+                        type="radio"
+                        name="IsUndersupplyBackordered"
+                        id="IsUndersupplyBackordered"
+                      />
+                      Yes
+                      <span class="formbold-radio-checkmark"></span>
+                    </label>
+                  </div>
+        
+                  <div class="formbold-radio-group">
+                    <label class="formbold-radio-label">
+                      <input
+                        class="formbold-input-radio"
+                        type="radio"
+                        name="IsUndersupplyBackordered"
+                        id="IsUndersupplyBackordered"
+                      />
+                      No
+                      <span class="formbold-radio-checkmark"></span>
+                    </label>
+                  </div>
+        
+                  
+                </div>
+              </div>
+
+            <div class="formbold-input-group">
+                <label for="PickingCompletedWhen" class="formbold-form-label"> Picking Completed When </label>
+                <input
+                  type="text"
+                  name="PickingCompletedWhen"
+                  id="PickingCompletedWhen"
+                  placeholder="Enter Picking Completed When"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            
+
+
+            <button class="formbold-btn">Add</button>
+          </form>
+        </div>
+      </div>
+      
+  
+  {% endblock %}   

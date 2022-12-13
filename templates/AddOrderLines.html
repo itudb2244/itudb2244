@@ -1,0 +1,104 @@
+
+   
+    {% extends "layout.html" %}
+    {% block title %}Order Lines{% endblock %}
+    {% block content %}  
+
+<div class="formbold-main-wrapper">
+        
+
+        <div class="formbold-form-wrapper">
+
+          <h1 class="title">Add Order Lines</h1>
+       
+          <form  method="POST" action="{{url_for('order_lines_page')}}">
+            <div class="formbold-input-group">
+              <label for="OrderID" class="formbold-form-label"> Order ID </label>
+              <input
+                type="text"
+                name="OrderID"
+                id="OrderID"
+                placeholder="Enter Order ID"
+                class="formbold-form-input"
+              />
+            </div>
+
+            
+            <div class="formbold-input-group">
+                <label for="StockItemID" class="formbold-form-label"> StockItem ID </label>
+                <input
+                  type="text"
+                  name="StockItemID"
+                  id="StockItemID"
+                  placeholder="Enter StockItem ID"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="Description" class="formbold-form-label"> Description </label>
+                <textarea
+                  type="text"
+                  rows="4"
+                  name="Description"
+                  id="Description"
+                  placeholder="Enter Description"
+                  class="formbold-form-input"
+                ></textarea>
+            </div>
+      
+
+            <div class="formbold-input-group">
+                <label for="Quantity" class="formbold-form-label"> Quantity </label>
+                <input
+                  type="number"
+                  name="Quantity"
+                  id="Quantity"
+                  placeholder="Enter Quantity"
+                  class="formbold-form-input"
+                />
+            </div>
+              
+
+            <div class="formbold-input-group">
+                <label for="UnitPrice" class="formbold-form-label"> Unit Price </label>
+                <input
+                  type="text"
+                  name="UnitPrice"
+                  id="UnitPrice"
+                  placeholder="Enter Unit Price"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="PickedQuantity" class="formbold-form-label"> Picked Quantity </label>
+                <input
+                  type="number"
+                  name="PickedQuantity"
+                  id="PickedQuantity"
+                  placeholder="Enter Picked Quantity"
+                  class="formbold-form-input"
+                />
+            </div>
+
+
+            <div class="formbold-input-group">
+                <label for="PickingCompletedWhen" class="formbold-form-label"> Picking Completed When </label>
+                <input
+                  type="text"
+                  name="PickingCompletedWhen"
+                  id="PickingCompletedWhen"
+                  placeholder="Enter Picking Completed When"
+                  class="formbold-form-input"
+                />
+            </div>
+
+
+            <button class="formbold-btn">Add</button>
+          </form>
+        </div>
+      </div>
+      
+  
+  {% endblock %}   
