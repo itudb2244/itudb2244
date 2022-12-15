@@ -35,12 +35,9 @@
         {% for customer in customers %}
         <tr>
           <th scope="row">{{ customer.CustomerID }}</th>
-          <td>{{ customer.CustomerName }}</td>
-          <td>{{ customer.PrimaryContactPersonID }}</td>
-          <td>{{ customer.PhoneNumber }}</td>
-          <td>{{ customer.WebsiteURL }}</td>
-          <td>{{ customer.DeliveryAddressLine1 }}</td>
-          <td>{{ customer.DeliveryAddressLine2 }}</td>
+        {% for attr in customer.__dict__.keys() %}
+          <td>{{ customer[attr] }}</td>
+        {% endfor %}
         </tr>
         {% endfor %}
       </tbody>
