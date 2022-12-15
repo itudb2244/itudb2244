@@ -1,0 +1,173 @@
+
+   
+    {% extends "layout.html" %}
+    {% block title %}Add Invoices{% endblock %}
+    {% block content %}  
+
+<div class="formbold-main-wrapper">
+        
+
+        <div class="formbold-form-wrapper">
+
+          <h1 class="title">Add Invoice</h1>
+       
+          <form  method="POST" action="{{url_for('invoices_page')}}">
+
+            <div class="formbold-input-group">
+              <label for="CustomerID" class="formbold-form-label"> Customer ID </label>
+              <input
+                type="text"
+                name="CustomerID"
+                id="CustomerID"
+                placeholder="Enter Customer ID"
+                class="formbold-form-input"
+              />
+            </div>
+
+            
+            <div class="formbold-input-group">
+                <label for="OrderID" class="formbold-form-label"> Order ID </label>
+                <input
+                  type="text"
+                  name="OrderID"
+                  id="OrderID"
+                  placeholder="Enter Order ID"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="ContactPersonID" class="formbold-form-label"> Contact Person ID </label>
+                <textarea
+                  type="text"
+                  rows="4"
+                  name="ContactPersonID"
+                  id="ContactPersonID"
+                  placeholder="Enter Contact Person ID"
+                  class="formbold-form-input"
+                ></textarea>
+            </div>
+      
+
+            <div class="formbold-input-group">
+                <label for="AccountsPersonID" class="formbold-form-label"> Accounts Person ID </label>
+                <input
+                  type="text"
+                  name="AccountsPersonID"
+                  id="AccountsPersonID"
+                  placeholder="Enter Accounts Person ID"
+                  class="formbold-form-input"
+                />
+            </div>
+              
+
+            <div class="formbold-input-group">
+                <label for="InvoiceDate" class="formbold-form-label"> Invoice Date </label>
+                <input
+                  type="text"
+                  name="InvoiceDate"
+                  id="InvoiceDate"
+                  placeholder="Enter Invoice Date"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="CustomerPurchaseOrderNumber" class="formbold-form-label"> Customer Purchase Order Number </label>
+                <input
+                  type="text"
+                  name="CustomerPurchaseOrderNumber"
+                  id="CustomerPurchaseOrderNumber"
+                  placeholder="Enter Customer Purchase Order Number"
+                  class="formbold-form-input"
+                />
+            </div>
+
+
+            <div class="formbold-input-group">
+                <label for="DeliveryInstructions" class="formbold-form-label"> Delivery Instructions </label>
+                <textarea
+                  type="text"
+                  rows="3"
+                  name="DeliveryInstructions"
+                  id="DeliveryInstructions"
+                  placeholder="Enter Delivery Instructions"
+                  class="formbold-form-input"
+                ></textarea>
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="InternalComments" class="formbold-form-label"> Internal Comments </label>
+                <textarea
+                  type="text"
+                  rows="3"
+                  name="InternalComments"
+                  id="InternalComments"
+                  placeholder="Enter Internal Comments"
+                  class="formbold-form-input"
+                ></textarea>
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="DeliveryRun" class="formbold-form-label"> Delivery Run </label>
+                <input
+                  type="text"
+                  name="DeliveryRun"
+                  id="DeliveryRun"
+                  placeholder="Enter Delivery Run"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="RunPosition" class="formbold-form-label"> Run Position </label>
+                <input
+                  type="number"
+                  name="RunPosition"
+                  id="RunPosition"
+                  placeholder="Enter Run Position"
+                  class="formbold-form-input"
+                />
+            </div>
+            
+            <div class="formbold-input-group">
+                <label for="ReturnedDeliveryData" class="formbold-form-label"> Returned Delivery Data </label>
+                <input
+                  type="text"
+                  name="ReturnedDeliveryData"
+                  id="ReturnedDeliveryData"
+                  placeholder="Enter Returned Delivery Data"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="ConfirmedDeliveryTime" class="formbold-form-label"> Confirmed Delivery Time </label>
+                <input
+                  type="text"
+                  name="ConfirmedDeliveryTime"
+                  id="ConfirmedDeliveryTime"
+                  placeholder="Enter Confirmed Delivery Time"
+                  class="formbold-form-input"
+                />
+            </div>
+
+
+            <div class="formbold-input-group">
+                <label for="ConfirmedReceivedBy" class="formbold-form-label"> Confirmed Received By </label>
+                <input
+                  type="number"
+                  name="ConfirmedReceivedBy"
+                  id="ConfirmedReceivedBy"
+                  placeholder="Enter Confirmed Received By"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <button class="formbold-btn">Add</button>
+          </form>
+        </div>
+      </div>
+      
+  
+  {% endblock %}   

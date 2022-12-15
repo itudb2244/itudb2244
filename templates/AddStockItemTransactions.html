@@ -1,0 +1,81 @@
+
+   
+    {% extends "layout.html" %}
+    {% block title %}AddStockItemTransactions{% endblock %}
+    {% block content %}  
+
+<div class="formbold-main-wrapper">
+        
+
+        <div class="formbold-form-wrapper">
+
+          <h1 class="title">Add Stock Item Transactions</h1>
+       
+          <form  method="POST" action="{{url_for('stockitem_transactions_page')}}">
+            <div class="formbold-input-group">
+              <label for="StockItemID" class="formbold-form-label">StockItem ID </label>
+              <input
+                type="text"
+                name="StockItemID"
+                id="StockItemID"
+                placeholder="Enter StockItem ID"
+                class="formbold-form-input"
+              />
+            </div>
+
+            
+            <div class="formbold-input-group">
+                <label for="CustomerID" class="formbold-form-label">Customer ID</label>
+                <input
+                  type="text"
+                  name="CustomerID"
+                  id="CustomerID"
+                  placeholder="Enter Customer ID"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="InvoiceID" class="formbold-form-label"> Invoice ID </label>
+                <input
+                  type="text"
+                  name="InvoiceID"
+                  id="InvoiceID"
+                  placeholder="Enter Invoice ID"
+                  class="formbold-form-input"
+                />
+            </div>
+      
+
+            <div class="formbold-input-group">
+                <label for="TransactionOccurredWhen" class="formbold-form-label"> Transaction Occurred When</label>
+                <input
+                  type="text"
+                  name="TransactionOccurredWhen"
+                  id="TransactionOccurredWhen"
+                  placeholder="Enter Transaction Occurred When"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="Quantity" class="formbold-form-label">Quantity</label>
+                <input
+                  type="number"
+                  name="Quantity"
+                  id="Quantity"
+                  placeholder="Enter Quantity"
+                  class="formbold-form-input"
+                />
+            </div>
+
+            
+              
+
+            <button class="formbold-btn">Add</button>
+          </form>
+        </div>
+      </div>
+      
+  
+  {% endblock %}   

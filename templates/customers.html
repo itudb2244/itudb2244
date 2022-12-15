@@ -12,7 +12,11 @@
       <input type="radio" name="options" id="SalesPerson" autocomplete="off"> SalesPerson
     </label>
   </div>
+  <u1>
+    <li><a href="{{ url_for('add_customers_page') }}">Add Customer Page </a></li>
+    </u1>
 
+  
   <div class="m-5 w-50">
     {% if customers %}
     <table class="table">
@@ -31,12 +35,9 @@
         {% for customer in customers %}
         <tr>
           <th scope="row">{{ customer.CustomerID }}</th>
-          <td>{{ customer.CustomerName }}</td>
-          <td>{{ customer.PrimaryContactPersonID }}</td>
-          <td>{{ customer.PhoneNumber }}</td>
-          <td>{{ customer.WebsiteURL }}</td>
-          <td>{{ customer.DeliveryAddressLine1 }}</td>
-          <td>{{ customer.DeliveryAddressLine2 }}</td>
+        {% for attr in customer.__dict__.keys() %}
+          <td>{{ customer[attr] }}</td>
+        {% endfor %}
         </tr>
         {% endfor %}
       </tbody>
