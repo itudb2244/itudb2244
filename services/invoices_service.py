@@ -3,7 +3,7 @@ import sqlite3
 from models import Invoices
 
 def get_invoices():
-    query = 'SELECT * FROM Invoices, Customers, Orders, People WHERE((Invoices.customerID=Customers.customerID) AND (Invoices.orderID=Orders.orderID) AND (Invoices.contactPersonID=People.personID) AND (Invoices.accountsPersonID=People.personID))'
+    query = "SELECT * FROM INVOICES, CUSTOMERS, ORDERS, PEOPLE WHERE((INVOICES.customerID=Customers.customerID) AND (INVOICES.orderID=Orders.orderID) AND (INVOICES.contactPersonID=People.personID) AND (INVOICES.accountsPersonID=People.personID))"
     invoices = []
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -15,7 +15,7 @@ def get_invoices():
     return invoices
 
 def get_invoice(id):
-    query = "SELECT * FROM Invoices, Customers, Orders, People WHERE((Invoices.InvoiceID = %s) AND (Invoices.customerID=Customers.customerID) AND (Invoices.orderID=Orders.orderID) AND (Invoices.contactPersonID=People.personID) AND (Invoices.accountsPersonID=People.personID))"
+    query = "SELECT * FROM INVOICES, CUSTOMERS, ORDERS, PEOPLE WHERE((INVOICES.invoiceID = %s) AND (INVOICES.customerID=CUSTOMERS.customerID) AND (INVOICES.orderID=ORDERS.orderID) AND (INVOICES.contactPersonID=PEOPLE.personID) AND (INVOICES.accountsPersonID=PEOPLE.personID))"
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
         cursor = connection.cursor()
@@ -27,7 +27,7 @@ def get_invoice(id):
     return None
 
 def add_invoice(Invoice):
-    query = "INSERT INTO Invoices (customerID, orderID, contactPersonID, accountsPersonID, invoiceDate, customerPurchaseOrderNumber, deliveryInstructions, internalComments, deliveryRun, runPosition, returnedDeliveryData, confirmedDeliveryTime, confirmedReceivedBy)"\
+    query = "INSERT INTO INVOICES (customerID, orderID, contactPersonID, accountsPersonID, invoiceDate, customerPurchaseOrderNumber, deliveryInstructions, internalComments, deliveryRun, runPosition, returnedDeliveryData, confirmedDeliveryTime, confirmedReceivedBy)"\
             "VALUES (%(customerID)s,%(orderID)s,%(contactPersonID)s,%(accountsPersonID)s,%(invoiceDate)s,%(customerPurchaseOrderNumber)s,%(deliveryInstructions)s, %(internalComments)s, %(deliveryRun)s, %(runPosition)s, %(returnedDeliveryData)s, %(confirmedDeliveryTime)s, %(confirmedReceivedBy)s)"\
             "RETURNING invoiceID"
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -38,7 +38,7 @@ def add_invoice(Invoice):
         return invoiceID
         
 def delete_invoice(id):
-    query = "DELETE FROM Invoices WHERE(InvoiceID = %s)"
+    query = "DELETE FROM INVOICES WHERE(invoiceID = %s)"
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:
             cursor = connection.cursor()
@@ -48,7 +48,7 @@ def delete_invoice(id):
         return False
 
 def update_invoice(id,Invoice):
-    query = "UPDATE Invoices SET InvoiceDate=%s, CustomerPurchaseOrderNumber=%s, DeliveryInstructions=%s, InternalComments=%s, DeliveryRun=%s, RunPosition=%s , ReturnedDeliveryData=%s , ConfirmedDeliveryTime=%s , ConfirmedReceivedBy=%s WHERE (CustomerID = %s)"
+    query = "UPDATE INVOICES SET invoiceDate=%s, customerPurchaseOrderNumber=%s, deliveryInstructions=%s, internalComments=%s, deliveryRun=%s, runPosition=%s , returnedDeliveryData=%s , confirmedDeliveryTime=%s , confirmedReceivedBy=%s WHERE (customerID = %s)"
     invoice = Invoice.get()
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:
