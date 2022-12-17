@@ -1,5 +1,6 @@
 from flask import current_app, render_template
 import services.customer_service as customerService
+import sqlite3 as sql
 
 def home_page():
     return render_template("home.html")
@@ -9,10 +10,19 @@ def customers_page():
     customers = customerService.get_customers()
     return render_template("customers.html", customers=customers)
 
+
 def add_customers_page():
+    
     return render_template("AddCustomer.html")
 
 
+
+def delete_customer(id):
+   
+    customerService.delete_customer(id)
+    customers = customerService.get_customers()
+
+    return render_template("customers.html", customers=customers)
 
 def people_page():
     
