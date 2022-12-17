@@ -2,7 +2,7 @@ from flask import current_app, render_template
 import services.customer_service as customerService
 import sqlite3 as sql
 import services.orders_service as ordersService
-
+from services.service import *
 def home_page():
     return render_template("home.html")
 
@@ -26,8 +26,8 @@ def delete_customer(id):
     return render_template("customers.html", customers=customers)
 
 def people_page():
-    #people = peopleService.get_people()
-    return render_template("customers.html")
+    people = PeopleService.get_data()
+    return render_template("customers.html", title="People", table=people)
 
 def add_people_page():
     

@@ -6,4 +6,34 @@
             <li><a href="{{ url_for('add_people_page') }}">Add People Page </a></li>
         </u1>
     </header>
+
+      <thead>
+          {% for keys in table_object[0].__dict__.keys() %}
+            <th scope="column">{{ keys }}</th>
+          {% endfor %}
+      </thead>
+        <div class="m-5 w-50">
+    <h1> {{ title }}</h1>
+    <table class="table">
+      <tbody>
+        
+        {% for table_object in table_object %}
+        
+        <tr>
+            <td><a href="">Update {{Object}}</a></td>
+            <td><a href="{{ url_for('delete' , id=table_object.__dict__.values()[0])}}">Delete Customer</a></td>
+        {% for key in table_object.__dict__.keys() %}
+            {% if key == table_object.__dict__.keys()[0] %}
+            
+                <th scope="row">{{ table_object[key] }}</th>
+            {% else %}
+              <td>{{ table_object[key] }}</td>
+            {% endif %}
+        {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
 {% endblock %}
