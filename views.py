@@ -1,5 +1,6 @@
 from flask import current_app, render_template
 import services.customer_service as customerService
+import services.orders_service as ordersService
 
 def home_page():
     return render_template("home.html")
@@ -7,7 +8,7 @@ def home_page():
 
 def customers_page():
     customers = customerService.get_customers()
-    return render_template("customers.html", customers=customers)
+    return render_template("customers.html", title="Customers", table=customers)
 
 def add_customers_page():
     return render_template("AddCustomer.html")
@@ -15,8 +16,8 @@ def add_customers_page():
 
 
 def people_page():
-    
-    return render_template("people.html")
+    people = peopleService.get_people()
+    return render_template("customers.html", title="People", table=people)
 
 def add_people_page():
     
@@ -42,7 +43,6 @@ def add_invoice_lines_page():
 
 
 def invoices_page():
-    
     return render_template("Invoices.html")
 
 def add_invoices_page():
@@ -59,8 +59,8 @@ def add_order_lines_page():
 
 
 def orders_page():
-    
-    return render_template("Orders.html")
+    orders = ordersService.get_orders()
+    return render_template("customers.html", title="Orders", table=orders)
 
 def add_orders_page():
     
