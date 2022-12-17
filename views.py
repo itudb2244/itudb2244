@@ -2,7 +2,7 @@ from flask import current_app, render_template
 import services.customer_service as customerService
 
 from services.service import *
-
+"""
 class Table():
     def __init__(self, type, obje ):
         self.type = type
@@ -16,7 +16,7 @@ class Table():
 class CustomerTable(Table):
     def __init__(self):
         super().__init__("Customers",CustomerService )
-
+"""
         
 
 def home_page():
