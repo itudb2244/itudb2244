@@ -4,7 +4,7 @@ cd Tables
 rm ../import_test.db
     sqlite3 ../import_test.db << EOF
 create table if not exists  People(
-PersonID INT PRIMARY KEY,
+PersonID INT PRIMARY KEY AUTOINCREMENT,
 FullName TEXT,
 LogonName TEXT,
 HashedPassword TEXT,
@@ -16,7 +16,7 @@ EmailAddress TEXT
 );
 
 create table if not exists StockItems(
-StockItemID INT PRIMARY KEY,
+StockItemID INT PRIMARY KEY AUTOINCREMENT,
 StockItemName TEXT,
 LeadTimeDays INT,
 UnitPrice REAL,
@@ -24,7 +24,7 @@ RecommendedRetailPrice REAL
 );
 
 create table if not exists Customers(
-CustomerID INT PRIMARY KEY,
+CustomerID INT PRIMARY KEY AUTOINCREMENT,
 CustomerName TEXT,
 PrimaryContactPersonID INT REFERENCES People(PersonID) ON DELETE CASCADE,
 PhoneNumber TEXT,
@@ -35,7 +35,7 @@ DeliveryAddressLine2 TEXT
 
 
 create table if not exists InvoiceLines(
-InvoiceLineID INT PRIMARY KEY,
+InvoiceLineID INT PRIMARY KEY AUTOINCREMENT,
 InvoiceID INT REFERENCES Invoices(InvoiceID) ON DELETE CASCADE,
 StockItemID INT REFERENCES StockItems(StockItemID) ON DELETE CASCADE,
 Description TEXT,
@@ -46,7 +46,7 @@ ExtendedPrice REAL
 );
 
 create table if not exists Invoices( 
-InvoiceID INT PRIMARY KEY,
+InvoiceID INT PRIMARY KEY AUTOINCREMENT,
 CustomerID INT REFERENCES Customers(CustomerID) ON DELETE CASCADE,
 OrderID	INT REFERENCES Orders(OrderID) ON DELETE CASCADE,
 ContactPersonID INT REFERENCES People(PersonID) ON DELETE CASCADE,
@@ -62,7 +62,7 @@ ConfirmedDeliveryTime TEXT,
 ConfirmedReceivedBy TEXT);
 
 create table if not exists CustomerTransactions(
-CustomerTransactionID INT PRIMARY KEY,
+CustomerTransactionID INT PRIMARY KEY AUTOINCREMENT,
 CustomerID INT REFERENCES Customers(CustomerID) ON DELETE CASCADE,
 InvoiceID INT REFERENCES Invoices(InvoiceID) NULL ON DELETE CASCADE,
 TransactionDate TEXT,
@@ -75,7 +75,7 @@ IsFinalized INT
 );
 
 create table if not exists OrderLines(
-OrderLineID INT PRIMARY KEY,
+OrderLineID INT PRIMARY KEY AUTOINCREMENT,
 OrderID INT REFERENCES Orders(OrderID) ON DELETE CASCADE,
 StockItemID INT REFERENCES StockItems(StockItemID) ON DELETE CASCADE,
 Description TEXT,
@@ -85,7 +85,7 @@ PickedQuantity INT,
 PickingCompletedWhen TEXT);
 
 create table if not exists Orders(
-OrderID INT PRIMARY KEY,
+OrderID INT PRIMARY KEY AUTOINCREMENT,
 CustomerID INT REFERENCES Customers(CustomerID) ON DELETE CASCADE,
 OrderDate TEXT,
 ExpectedDeliveryDate TEXT,
@@ -95,7 +95,7 @@ PickingCompletedWhen TEXT
 );
 
 create table if not exists StockItemHoldings(
-StockItemHoldingID INT PRIMARY KEY,
+StockItemHoldingID INT PRIMARY KEY AUTOINCREMENT,
 StockItemID INT REFERENCES StockItems(StockItemID) ON DELETE CASCADE,
 QuantityOnHand INT,
 BinLocation TEXT, 
@@ -106,7 +106,7 @@ TargetStockLevel INT);
 
 
 create table if not exists StockItemTransactions(
-StockItemTransactionID INT,
+StockItemTransactionID INT PRIMARY KEY AUTOINCREMENT,
 StockItemID INT REFERENCES StockItems(StockItemID) ON DELETE CASCADE,
 CustomerID INT REFERENCES Customers(CustomerID) ON DELETE CASCADE,
 InvoiceID INT REFERENCES Invoices(InvoiceID) ON DELETE CASCADE,
