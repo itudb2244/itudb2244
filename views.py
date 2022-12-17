@@ -3,6 +3,22 @@ import services.customer_service as customerService
 
 from services.service import *
 
+class Table():
+    def __init__(self, type, obje ):
+        self.type = type
+        self.obje = obje
+
+    def get_table(self):
+        service = self.obje()
+        data = service.get_data()
+        return render_template("generic_list.html", title=type, table=data)
+
+class CustomerTable(Table):
+    def __init__(self):
+        super().__init__("Customers",CustomerService )
+
+        
+
 def home_page():
     return render_template("home.html")
 
