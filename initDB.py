@@ -5,7 +5,7 @@ con = sqlite3.connect("test.db")
 init_statements = {
 
     'create_customers_table' : """CREATE TABLE IF NOT EXISTS CUSTOMERS(
-        customerID INTEGER PRIMARY KEY,
+        customerID INTEGER SERIAL PRIMARY KEY,
         customerName VARCHAR(50),
         primaryContactPersonID INTEGER REFERENCES PEOPLE,
         phoneNumber INTEGER,
@@ -14,7 +14,7 @@ init_statements = {
         deliveryAddressLine2 VARCHAR(50)
     )""",
     'create_invoices_table' : """CREATE TABLE IF NOT EXISTS INVOICES(
-        invoiceID INTEGER PRIMARY KEY,
+        invoiceID INTEGER SERIAL PRIMARY KEY,
         customerID INTEGER REFERENCES CUSTOMERS,
         orderID	INTEGER REFERENCES ORDERS,
         contactPersonID INTEGER REFERENCES PEOPLE,
@@ -30,7 +30,7 @@ init_statements = {
         confirmedReceivedBy VARCHAR(200)
     )""",
     'create_orders_table' : """CREATE TABLE IF NOT EXISTS ORDERS(
-        orderID INTEGER PRIMARY KEY,
+        orderID INTEGER SERIAL PRIMARY KEY,
         customerID INTEGER REFERENCES CUSTOMERS,
         orderDate DATE,
         expectedDeliveryDate DATE,
@@ -39,8 +39,8 @@ init_statements = {
         pickingCompletedWhen VARCHAR(25)
     )""",
     'create_invoiceLines_table' : """CREATE TABLE IF NOT EXISTS INVOICE_LINES(
-        invoiceLineID INTEGER PRIMARY KEY,
-        invoiceID INTEGER REFERENCES ınvoıces,
+        invoiceLineID INTEGER SERIAL PRIMARY KEY,
+        invoiceID INTEGER REFERENCES invoices,
         stockItemID INTEGER REFERENCES STOCK_ITEMS,
         description VARCHAR(100),
         quantity INTEGER,
@@ -49,7 +49,7 @@ init_statements = {
         extendedPrice DECIMAL(10,2)
     )""",
     'create_orderLines_table' : """CREATE TABLE IF NOT EXISTS ORDER_LINES(
-        orderLineID INTEGER PRIMARY KEY,
+        orderLineID INTEGER SERIAL PRIMARY KEY,
         orderID INTEGER REFERENCES ORDERS,
         stockItemID INTEGER REFERENCES StockItems(StockItemID),
         description VARCHAR(100),
@@ -59,7 +59,7 @@ init_statements = {
         pickingCompletedWhen VARCHAR(50)
     )""",
     'create_customerTransaction_table' : """CREATE TABLE IF NOT EXISTS CUSTOMER_TRANSACTIONS(
-        customerTransactionID INTEGER PRIMARY KEY,
+        customerTransactionID INTEGER SERIAL PRIMARY KEY,
         customerID INTEGER REFERENCES CUSTOMERS,
         invoiceID INTEGER REFERENCES INVOICES,
         transactionDate DATE,
@@ -71,7 +71,7 @@ init_statements = {
         isFinalized INTEGER
     )""",
     'create_people_table' : """CREATE TABLE IF NOT EXISTS PEOPLE(
-        personID INTEGER PRIMARY KEY,
+        personID INTEGER SERIAL PRIMARY KEY,
         fullName VARCHAR(50),
         logonName VARCHAR(50),
         hashedPassword VARCHAR(100),
@@ -82,13 +82,14 @@ init_statements = {
         emailAddress VARCHAR(20)
     )""",
     'create_stockItem_table' : """CREATE TABLE IF NOT EXISTS STOCK_ITEMS(
-        stockItemID INTEGER PRIMARY KEY,
+        stockItemID INTEGER SERIAL PRIMARY KEY,
         stockItemName VARCHAR(100),
         leadTimeDays INTEGER,
         unitPrice DECIMAL(10, 2),
         recommendedRetailPrice DECIMAL(10, 2)
     )""",
     'create_stockItemHoldings_table' : """CREATE TABLE IF NOT EXISTS STOCK_ITEM_HOLDINGS(
+        stockItemHoldingID INTEGER SERIAL PRIMARY KEY,
         stockItemID INTEGER REFERENCES StockItems(StockItemID),
         quantityOnHand INTEGER,
         binLocation VARCHAR(5), 
@@ -98,7 +99,7 @@ init_statements = {
         targetStockLevel INTEGER
     )""",
     'create_stockItemTransaction_table' : """CREATE TABLE IF NOT EXISTS STOCK_ITEM_TRANSACTIONS(
-        stockItemTransactionID INTEGER,
+        stockItemTransactionID INTEGER SERIAL PRIMARY KEY,
         stockItemID INTEGER REFERENCES STOCK_ITEMS,
         customerID INTEGER REFERENCES CUSTOMERS,
         invoiceID INTEGER REFERENCES INVOICES,
