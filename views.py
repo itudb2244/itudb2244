@@ -1,4 +1,4 @@
-from flask import current_app, render_template
+from flask import current_app, render_template, request, redirect, url_for
 import services.customer_service as customerService
 
 from services.service import *
@@ -18,7 +18,22 @@ def get_customer(id):
     return render_template("customers.html", title="Get Customers", table=customers)
 
 def add_customers_page():
-    return render_template("AddCustomer.html")
+    if request.method == "GET":
+        return render_template("AddCustomer.html")
+    else:
+        customerName = request.form["CustomerName"]
+        phoneNumber = request.form["PhoneNumber"]
+        websiteURL = request.form["WebsiteURL"]
+        deliveryAddressLine1 = request.form["DeliveryAddressLine1"]
+        deliveryAddressLine2 = request.form["DeliveryAddressLine2"]
+        customer = Customer((-1, customerName, -1, phoneNumber, websiteURL, deliveryAddressLine1, deliveryAddressLine2))
+
+        service = CustomerService()
+        service.add_row(customer)
+
+        customers = service.get_data()
+        return redirect(url_for("customers_page"))
+        
 
 
 

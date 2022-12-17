@@ -20,9 +20,9 @@ class Customer(object):
             'CustomerName': self.CustomerName,
             'PrimaryContactPersonID': self.PrimaryContactPersonID,
             'PhoneNumber': self.PhoneNumber,
-            'WebSiteURL': self.WebsiteURL,
-            'DeliverAddressLine1': self.DeliveryAddressLine1,
-            'DeliverAddressLine2': self.DeliveryAddressLine2,
+            'WebsiteURL': self.WebsiteURL,
+            'DeliveryAddressLine1': self.DeliveryAddressLine1,
+            'DeliveryAddressLine2': self.DeliveryAddressLine2,
         }
         return customer
 
@@ -31,6 +31,9 @@ class Customer(object):
 
     def getCopy(self):
         return copy.deepcopy(self)
+
+    def getColumns():
+        return ["CustomerName", "PhoneNumber", "WebsiteURL", "DeliveryAddressLine1", "DeliveryAddressLine2"]
 
     
 class CustomerTransactions(object):
