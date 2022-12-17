@@ -32,6 +32,8 @@ def create_app():
     app.add_url_rule("/stockitem-transactions/add-stockitem-transactions", view_func=views.add_stockitem_transactions_page,methods=["GET","POST"])
 
 
+    app.add_url_rule("/customer/<int:id>", view_func=views.get_customer, methods=["GET", "POST"])
+
 
     app.config["dbname"] = "import_test.db"
 
@@ -42,7 +44,7 @@ def create_db():
         rc = call("./import_tables.sh")
 
 if __name__ == "__main__":
-  #  create_db() ################COMMENT to disable DB creation at every run
+    # create_db() ################COMMENT to disable DB creation at every run
     app = create_app()
     port = app.config.get("PORT", 5000)
     app.run(port=port)
