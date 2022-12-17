@@ -38,7 +38,39 @@ class CustomerService(Service):
     def __init__(self):
         Service.__init__(self, "Customers", Customer)
 
+class CustomerTransactionService(Service):
+    def __init__(self):
+        Service.__init__(self, "CustomerTransactions", CustomerTransactions)
+
+class InvoiceLineService(Service):
+    def __init__(self):
+        Service.__init__(self, "InvoiceLines", InvoiceLines)
+
+class InvoiceService(Service):
+    def __init__(self):
+        Service.__init__(self, "Invoices", Invoices)
+
+class OrderLineService(Service):
+    def __init__(self):
+        Service.__init__(self, "OrderLines", OrderLines)
+
+class OrderService(Service):
+    def __init__(self):
+        Service.__init__(self, "Orders", Orders)
+
 class PeopleService(Service):
     def __init__(self):
         Service.__init__(self, "People", People)
+
+class StockItemHoldingService(Service):
+    def __init__(self):
+        Service.__init__(self, "StockItemHoldings", StockItemHoldings)
+
+class StockItemService(Service):
+    def __init__(self):
+        Service.__init__(self, "StockItems", StockItems)
+
+class StockItemTransactionService(Service):
+    def __init__(self):
+        Service.__init__(self, "StockItemTransactions", StockItemTransactions)
 
