@@ -39,7 +39,7 @@ class Service():
  
 
     def add_row(self, obj):
-        columns = self.object_type.getColumns()
+        columns = self.object_type.getNonKeyColumns()
 
         query = 'INSERT INTO '+self.table+'('
         for i,column in enumerate(columns):
@@ -53,7 +53,7 @@ class Service():
         keys = dictionary.keys()
 
         for i,key in enumerate(keys):
-            if key in self.object_type.getColumns():
+            if key in columns:
                 query += '"' + dictionary[key] + '"'
                 if i != len(keys) - 1:
                     query += ', '
@@ -77,8 +77,7 @@ class Service():
                 cursor = connection.cursor()
                 cursor.execute(query)
                 
-                redirect(url_for(request.path))
-
+                return True
         except:
             return False
 
