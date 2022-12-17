@@ -40,11 +40,14 @@
         
         {% for iter in table_object %}
         
+        
         <tr>
           <td>
+            <a style="color:white; text-decoration: none;" href="{{url_for(title + '_delete', id=iter.__dict__.values())}}">
             <button class="del-btn">
-              <a style="color:white; text-decoration: none;" href="{{url_for(title + '_delete', id=iter.__dict__.values())}}">delete</a>
+              delete
             </button>
+          </a>
           </td>
         {% for key in iter.__dict__.keys() %}
             {% if key == iter.__dict__.keys()[0] %}
