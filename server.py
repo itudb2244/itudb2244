@@ -9,10 +9,11 @@ def create_app():
 
     #CustomerTable = views.CustomerTable()
     app.add_url_rule("/", view_func=views.home_page)
-    app.add_url_rule("/customers", endpoint="customers_page", view_func=views.CustomerTable().get_table, methods=["GET","POST"])
-    app.add_url_rule("/people", view_func=views.PeopleTable().get_table, methods=["GET","POST"])
-    app.add_url_rule("/customers/add-customer", view_func=views.CustomerTable().add_row,  methods=["GET","POST"])
-    app.add_url_rule("/customer/<int:id>", view_func=views.get_customer, methods=["GET", "POST"])
+    app.add_url_rule("/customers", endpoint="Customers_page", view_func=views.CustomerTable().get_table, methods=["GET","POST"])
+    app.add_url_rule("/customers/add-customer", endpoint="Customers_add", view_func=views.CustomerTable().add_row,  methods=["POST"])
+    app.add_url_rule("/customers/delete-customer", endpoint="Customers_delete", view_func=views.CustomerTable().delete_row, methods=["GET", "POST"])
+    # app.add_url_rule("/customer/<int:id>", endpoint="Customers_get", view_func=views.get_customer, methods=["GET", "POST"])
+
 
     app.config["dbname"] = "import_test.db"
 
