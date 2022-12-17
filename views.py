@@ -26,7 +26,7 @@ def people_page():
     service = PeopleService()
     people = service.get_data()
     
-    return render_template("customers.html", title="People", table=people)
+    return render_template("people.html", title="People", peoples=people)
 
 def add_people_page():
     

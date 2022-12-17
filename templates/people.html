@@ -8,7 +8,7 @@
     </header>
 
       <thead>
-          {% for keys in table_object[0].__dict__.keys() %}
+          {% for keys in peoples[0].__dict__.keys() %}
             <th scope="column">{{ keys }}</th>
           {% endfor %}
       </thead>
@@ -17,17 +17,17 @@
     <table class="table">
       <tbody>
         
-        {% for table_object in table_object %}
+            <td><a href="{{url_for('delete')}}">Delete Customer</a></td>
+        {% for people in peoples %}
         
         <tr>
             <td><a href="">Update {{Object}}</a></td>
-            <td><a href="{{ url_for('delete' , id=table_object.__dict__.values()[0])}}">Delete Customer</a></td>
-        {% for key in table_object.__dict__.keys() %}
-            {% if key == table_object.__dict__.keys()[0] %}
+                {% for key in people.__dict__.keys() %}
+            {% if key == people.__dict__.keys()[0] %}
             
-                <th scope="row">{{ table_object[key] }}</th>
+                <th scope="row">{{ people[key] }}</th>
             {% else %}
-              <td>{{ table_object[key] }}</td>
+              <td>{{ people[key] }}</td>
             {% endif %}
         {% endfor %}
         </tr>
