@@ -13,10 +13,9 @@
     </label>
   </div>
   <u1>
-    <li><a href="{{ url_for('add_customers_page') }}">Add Customer Page </a></li>
     </u1>
 
-  
+    <a href="{{url_for(view_class + '_page')}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add User</a>
   <div class="m-5 w-50">
     <h1> {{ title }}</h1>
     {{list_macro.list_all(table, title)}}
