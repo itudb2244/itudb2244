@@ -3,7 +3,7 @@ import sqlite3
 from models import Orders
 
 def get_orders():
-    query = 'SELECT * FROM Orders, Customers WHERE (Orders.customerID=Customers.customerID)'
+    query = "SELECT * FROM ORDERS, CUSTOMERS WHERE (ORDERS.customerID=CUSTOMERS.customerID)"
     orders = []
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -15,7 +15,7 @@ def get_orders():
     return orders
 
 def get_order(id):
-    query = "SELECT * FROM Orders, Customers WHERE((Orders.OrderID = %s) AND (Orders.customerID=Customers.customerID))"
+    query = "SELECT * FROM ORDERS, CUSTOMERS WHERE((ORDERS.OrderID = %s) AND (ORDERS.customerID=CUSTOMERS.customerID))"
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
         cursor = connection.cursor()
@@ -27,7 +27,7 @@ def get_order(id):
     return None
 
 def add_order(Order):
-    query = "INSERT INTO Orders (customerID, orderDate, expectedDeliveryDate,  customerPurchaseOrderNumber, isUndersupplyBackordered, pickingCompletedWhen)"\
+    query = "INSERT INTO ORDERS (customerID, orderDate, expectedDeliveryDate,  customerPurchaseOrderNumber, isUndersupplyBackordered, pickingCompletedWhen)"\
             "VALUES (%(customerID)s, %(orderDate)s,%(expectedDeliveryDate)s,%(customerPurchaseOrderNumber)s,%(isUndersupplyBackordered)s,%(pickingCompletedWhen)s)"\
             "RETURNING orderID"
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -38,7 +38,7 @@ def add_order(Order):
         return orderID
         
 def delete_order(id):
-    query = "DELETE FROM Orders WHERE(OrderID = %s)"
+    query = "DELETE FROM ORDERS WHERE(orderID = %s)"
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:
             cursor = connection.cursor()
@@ -48,12 +48,12 @@ def delete_order(id):
         return False
 
 def update_order(id,Order):
-    query = "UPDATE Orders SET OrderDate=%s, ExpectedDeliveryDate=%s, CustomerPurchaseOrderNumber=%s, IsUndersupplyBackordered=%s, PickingCompletedWhen=%s WHERE (OrderID = %s)"
+    query = "UPDATE ORDERS SET customerID=%s, orderDate=%s, expectedDeliveryDate=%s, customerPurchaseOrderNumber=%s, isUndersupplyBackordered=%s, pickingCompletedWhen=%s WHERE (orderID = %s)"
     order = Order.get()
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:
             cursor = connection.cursor()
-            cursor.execute(query, (order['OrderDate'], order['ExpectedDeliveryDate'], order['CustomerPurchaseOrderNumber'], order['IsUndersupplyBackordered'], order['PickingCompletedWhen'], id))
+            cursor.execute(query, (order['customerID'], order['OrderDate'], order['ExpectedDeliveryDate'], order['CustomerPurchaseOrderNumber'], order['IsUndersupplyBackordered'], order['PickingCompletedWhen'], id))
             return True
     except sqlite3.Error as er:
         # get the extended result code here

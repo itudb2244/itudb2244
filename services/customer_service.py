@@ -15,7 +15,7 @@ def get_customers():
     return customers
 
 def get_customer(id):
-    query = "SELECT * FROM Customers, People WHERE( (Customers.CustomerID = %s) AND (Customers.primaryContactPersonID=People.personID))"
+    query = "SELECT * FROM Customers WHERE (Customers.CustomerID = %s)"
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
         cursor = connection.cursor()
@@ -27,9 +27,9 @@ def get_customer(id):
     return None
 
 def add_customer(Customer):
-    query = "INSERT INTO Customers (customerID, customerName, primaryContactPersonID,  phoneNumber, websiteURL, deliveryAddressLine1, deliveryAddressLine2)"\
-            "VALUES (%(customerID)s, %(customerName)s,%(primaryContactPersonID)s,%(phoneNumber)s,%(websiteURL)s,%(deliveryAddressLine1)s,%(deliveryAddressLine2)s)"\
-            "RETURNING customerID"
+    query = "INSERT INTO Customers(CustomerID, CustomerName, PrimaryContactPersonID, PhoneNumber, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2)"\
+            "VALUES (%(CustomerID)s, %(CustomerName)s,%(PrimaryContactPersonID)s,%(PhoneNumber)s,%(WebsiteURL)s,%(DeliveryAddressLine1)s,%(DeliveryAddressLine2)s)"\
+            "RETURNING CustomerID"
     with sqlite3.connect(current_app.config["dbname"]) as connection:
         cursor = connection.cursor()
         customer = Customer.get()
@@ -51,12 +51,12 @@ def delete_customer(id):
 
 
 def update_customer(id,Customer):
-    query = "UPDATE Customers SET CustomerName=%s, PrimaryContactPersonID=%s, PhoneNumber=%s, WebsiteURL=%s, DeliveryAddressLine1=%s, DeliveryAddressLine2=%s WHERE (CustomerID = %s)"
+    query = "UPDATE Customers SET CustomerName=%s, PhoneNumber=%s, WebsiteURL=%s, DeliveryAddressLine1=%s, DeliveryAddressLine2=%s WHERE (CustomerID = %s)"
     customer = Customer.get()
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:
             cursor = connection.cursor()
-            cursor.execute(query, (customer['CustomerName'], customer['PrimaryContactPersonID'], customer['PhoneNumber'], customer['WebSiteURL'], customer['DeliverAddressLine1'], customer['DeliverAddressLine2'], id))
+            cursor.execute(query, (customer['CustomerName'], customer['PhoneNumber'], customer['WebSiteURL'], customer['DeliverAddressLine1'], customer['DeliverAddressLine2'], id))
             return True
     except sqlite3.Error as er:
         # get the extended result code here

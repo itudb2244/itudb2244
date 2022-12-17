@@ -1,14 +1,14 @@
 import copy
 
 class Customer(object):
-    def __init__(self, CustomerID, CustomerName, PrimaryContactPersonID, PhoneNumber, WebsiteURL, DeliveryAddressLine1, DeliveryAddressLine2):
-        self.CustomerID = CustomerID
-        self.CustomerName = CustomerName
-        self.PrimaryContactPersonID = PrimaryContactPersonID
-        self.PhoneNumber = PhoneNumber
-        self.WebsiteURL = WebsiteURL
-        self.DeliveryAddressLine1 = DeliveryAddressLine1
-        self.DeliveryAddressLine2 = DeliveryAddressLine2
+    def __init__(self, row):
+        self.CustomerID = row[0]
+        self.CustomerName = row[1]
+        self.PrimaryContactPersonID = row[2]
+        self.PhoneNumber = row[3]
+        self.WebsiteURL = row[4]
+        self.DeliveryAddressLine1 = row[5]
+        self.DeliveryAddressLine2 = row[6]
 
     def setID(self, id=None):
         self.id = id
@@ -31,7 +31,6 @@ class Customer(object):
 
     def getCopy(self):
         return copy.deepcopy(self)
-
 
     
 class CustomerTransactions(object):
@@ -199,16 +198,16 @@ class Orders(object):
         return copy.deepcopy(self)
 
 class People(object):
-    def __init__(self, PersonID,FullName,LogonName,HashedPassword,IsSystemUser,IsEmployee,IsSalesperson,PhoneNumber,EmailAddress):
-        self.PersonID =PersonID
-        self.FullName =FullName
-        self.LogonName =LogonName
-        self.HashedPassword =HashedPassword
-        self.IsSystemUser =IsSystemUser
-        self.IsEmployee =IsEmployee
-        self.IsSalesperson =IsSalesperson
-        self.PhoneNumber =PhoneNumber
-        self.EmailAddress =EmailAddress
+    def __init__(self, row):
+        self.PersonID = row[0]
+        self.FullName = row[1]
+        self.LogonName = row[2]
+        self.HashedPassword = row[3]
+        self.IsSystemUser = row[4]
+        self.IsEmployee = row[5]
+        self.IsSalesperson = row[6]
+        self.PhoneNumber = row[7]
+        self.EmailAddress = row[8]
 
     def toDict(self):
         people = {
