@@ -1,15 +1,21 @@
-{% macro list_all(table_object) %}
+{% macro list_all(table_object, Object) %}
     <table class="table">
       <thead>
           {% for keys in table_object[0].__dict__.keys() %}
             <th scope="column">{{ keys }}</th>
           {% endfor %}
       </thead>
+      
       <tbody>
+        
         {% for table_object in table_object %}
+        
         <tr>
+            <td><a href="">Update {{Object}}</a></td>
+            <td><a href="{{ url_for('delete' , id=table_object.__dict__.values()[0])}}">Delete Customer</a></td>
         {% for key in table_object.__dict__.keys() %}
             {% if key == table_object.__dict__.keys()[0] %}
+            
                 <th scope="row">{{ table_object[key] }}</th>
             {% else %}
               <td>{{ table_object[key] }}</td>
