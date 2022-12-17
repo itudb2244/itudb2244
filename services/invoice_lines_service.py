@@ -25,6 +25,17 @@ def get_invoice_line(id):
             invoice_line = InvoiceLines(dictionary['InvoiceLineID'], dictionary['InvoiceID'], dictionary['StockItemID'], dictionary['Description'], dictionary['Quantity'], dictionary['UnitPrice'], dictionary['LineProfit'], dictionary['ExtendedPrice'])
             return invoice_line
     return None
+
+def add_invoice_line(Invoice_line):
+    query = "INSERT INTO Invoice_Lines (invoiceID, stockItemID, description, quantity, unitPrice, lineProfit, extendedPrice)"\
+            "VALUES (%(invoiceID)s,%(stockItemID)s,%(description)s,%(quantity)s,%(unitPrice)s,%(lineProfit)s,%(extendedPrice)s)"\
+            "RETURNING invoiceLineID"
+    with sqlite3.connect(current_app.config["dbname"]) as connection:
+        cursor = connection.cursor()
+        invoice_line = Invoice_line.get()
+        cursor.execute(query,invoice_line)
+        invoiceLineID = cursor.fetchone()[0]
+        return invoiceLineID
         
 def delete_invoice_line(id):
     query = "DELETE FROM Invoice_Lines WHERE(InvoiceLineID = %s)"
@@ -47,7 +58,3 @@ def update_invoice_line(id, Invoice_line):
     except sqlite3.Error as er:
         # get the extended result code here
         return False 
-
-
-
-

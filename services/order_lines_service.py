@@ -2,8 +2,8 @@ from flask import current_app
 import sqlite3
 from models import OrderLines
 
-def get_customers():
-    query = 'SELECT * FROM Order_Lines'
+def get_order_lines():
+    query = 'SELECT * FROM Order_Lines, Orders, Stock_Item WHERE((Order_Lines.orderID=Orders.orderID) AND (Order_Lines.stockItemID=Stock_Item=stockItemID))'
     order_lines = []
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -14,8 +14,8 @@ def get_customers():
             order_lines.append(order_line)
     return order_lines
 
-def get_customer(id):
-    query = "SELECT * FROM Order_Lines WHERE(Order_Lines.OrderLineID = %s)"
+def get_order_line(id):
+    query = "SELECT * FROM Order_Lines, Orders, Stock_Item WHERE(Order_Lines.OrderLineID = %s) AND ((Order_Lines.orderID=Orders.orderID) AND (Order_Lines.stockItemID=Stock_Item=stockItemID))"
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
         cursor = connection.cursor()
@@ -25,9 +25,20 @@ def get_customer(id):
             order_line = OrderLines(dictionary['OrderLineID'], dictionary['OrderID'], dictionary['StockItemID'], dictionary['Description'], dictionary['Quantity'], dictionary['UnitPrice'], dictionary['PickedQuantity'], dictionary['PickingCompletedWhen'])
             return order_line
     return None
+
+def add_order_line(Order_Line):
+    query = "INSERT INTO Order_Lines (orderID, stockItemID, description, quantity, unitPrice, pickedQuantity, pickingCompletedWhen)"\
+            "VALUES (%(orderID)s,%(stockItemID)s,%(description)s,%(quantity)s,%(unitPrice)s,%(pickedQuantity)s,%(pickingCompletedWhen)s)"\
+            "RETURNING orderLineID"
+    with sqlite3.connect(current_app.config["dbname"]) as connection:
+        cursor = connection.cursor()
+        order_line = Order_Line.get()
+        cursor.execute(query,order_line)
+        orderLineID = cursor.fetchone()[0]
+        return orderLineID
         
-def delete_customer(id):
-    query = "DELETE FROM Order_Lines WHERE(CustomerID = %s)"
+def delete_order_line(id):
+    query = "DELETE FROM Order_Lines WHERE(orderLineID = %s)"
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:
             cursor = connection.cursor()
@@ -36,7 +47,7 @@ def delete_customer(id):
     except:
         return False
 
-def update_customer(id,Order_Line):
+def update_order_line(id,Order_Line):
     query = "UPDATE Order_Lines SET Description=%s, Quantity=%s, UnitPrice=%s, PickedQuantity=%s, PickingCompletedWhen=%s WHERE (OrderLineID = %s)"
     order_line = Order_Line.get()
     try:
