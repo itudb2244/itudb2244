@@ -8,7 +8,7 @@ def home_page():
 
 def customers_page():
     customers = customerService.get_customers()
-    return render_template("customers.html", title="Customers", table=customers)
+    return render_template("generic_list.html", title="Customers", table=customers)
 
 def add_customers_page():
     return render_template("AddCustomer.html")

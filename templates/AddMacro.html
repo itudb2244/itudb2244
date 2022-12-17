@@ -8,6 +8,7 @@
       <tbody>
         {% for table_object in table_object %}
         <tr>
+
         {% for key in table_object.__dict__.keys() %}
             {% if key == table_object.__dict__.keys()[0] %}
                 <th scope="row">{{ table_object[key] }}</th>
