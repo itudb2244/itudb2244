@@ -32,6 +32,7 @@ class Customer(object):
     def getCopy(self):
         return copy.deepcopy(self)
 
+
     
 class CustomerTransactions(object):
     def __init__(self,CustomerTransactionID,CustomerID,InvoiceID,TransactionDate,AmountExcludingTax,TaxAmount,TransactionAmount,OutstandingBalance,FinalizationDate,IsFinalized):

@@ -3,7 +3,7 @@ import sqlite3
 from models import Customer
 
 def get_customers():
-    query = "SELECT * FROM Customers"
+    query = 'SELECT * FROM Customers'
     customers = []
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -43,9 +43,12 @@ def delete_customer(id):
         with sqlite3.connect(current_app.config["dbname"]) as connection:
             cursor = connection.cursor()
             cursor.execute(query, (id,))
+            connection.commit()
             return True
     except:
         return False
+
+
 
 def update_customer(id,Customer):
     query = "UPDATE Customers SET CustomerName=%s, PhoneNumber=%s, WebsiteURL=%s, DeliveryAddressLine1=%s, DeliveryAddressLine2=%s WHERE (CustomerID = %s)"

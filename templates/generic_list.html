@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Customers{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block content %}   
   <div class="btn-group btn-group-toggle m-5" data-toggle="buttons">
     <label class="btn btn-info btn-lg active">
@@ -12,36 +12,14 @@
       <input type="radio" name="options" id="SalesPerson" autocomplete="off"> SalesPerson
     </label>
   </div>
+  <u1>
+    <li><a href="{{ url_for('add_customers_page') }}">Add Customer Page </a></li>
+    </u1>
 
+  
   <div class="m-5 w-50">
-    {% if customers %}
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">CustomerID</th>
-          <th scope="col">CustomerName</th>
-          <th scope="col">PrimaryContactPersonID</th>
-          <th scope="col">PhoneNumber</th>
-          <th scope="col">WebsiteURL</th>
-          <th scope="col">DeliveryAddressLine1</th>
-          <th scope="col">DeliveryAddressLine2</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for customer in customers %}
-        <tr>
-          <th scope="row">{{ customer.CustomerID }}</th>
-          <td>{{ customer.CustomerName }}</td>
-          <td>{{ customer.PrimaryContactPersonID }}</td>
-          <td>{{ customer.PhoneNumber }}</td>
-          <td>{{ customer.WebsiteURL }}</td>
-          <td>{{ customer.DeliveryAddressLine1 }}</td>
-          <td>{{ customer.DeliveryAddressLine2 }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% endif %}
+    <h1> {{ title }}</h1>
+    {{add_macro.list_all(table)}}
   </div>
 {% endblock %}
 </html>
