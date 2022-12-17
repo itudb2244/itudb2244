@@ -2,8 +2,8 @@ from flask import current_app
 import sqlite3
 from models import CustomerTransactions
 
-def get_customers():
-    query = 'SELECT * FROM Customers_Transactions'
+def get_customers_transactions():
+    query = 'SELECT * FROM Customers_Transactions, Customers, Invoices WHERE((Customers_Transactions.customerID=Customers.customerID) AND (Customers_Transactions.invoiceID=Invoices.InvoiceID))'
     customers_transactions = []
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -14,8 +14,8 @@ def get_customers():
             customers_transactions.append(customer_transaction)
     return customers_transactions
 
-def get_customer(id):
-    query = "SELECT * FROM Customers_Transactions WHERE(Customers_Transactions.CustomerTransactionID = %s)"
+def get_customers_transactions(id):
+    query = "SELECT * FROM Customers_Transactions, Customers, Invoices WHERE((Customers_Transactions.CustomerTransactionID = %s) AND (Customers_Transactions.customerID=Customers.customerID) AND (Customers_Transactions.invoiceID=Invoices.InvoiceID))"
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
         cursor = connection.cursor()
@@ -25,8 +25,19 @@ def get_customer(id):
             customer_transaction = CustomerTransactions(dictionary['CustomerTransactionID'], dictionary['CustomerID'], dictionary['InvoiceID'], dictionary['TransactionDate'], dictionary['AmountExcludingTax'], dictionary['TaxAmount'], dictionary['TransactionAmount'], dictionary['OutstandingBalance'], dictionary['FinalizationDate'], dictionary['IsFinalize'])
             return customer_transaction
     return None
+
+def add_customers_transactions(Customer_Transaction):
+    query = "INSERT INTO Customers_Transactions (customerTransactionID, customerID, invoiceID,  transactionDate, amountExcludingTax, taxAmount, transactionAmount, outstandingBalance, finalizationDate, isFinalized)"\
+            "VALUES (%(customerTransactionID)s, %(customerID)s,%(invoiceID)s,%(transactionDate)s,%(amountExcludingTax)s,%(taxAmount)s,%(transactionAmount)s,%(outstandingBalance)s,%(finalizationDate)s,%(isFinalized)s)"\
+            "RETURNING customerTransactionID"
+    with sqlite3.connect(current_app.config["dbname"]) as connection:
+        cursor = connection.cursor()
+        customer_transaction = Customer_Transaction.get()
+        cursor.execute(query,customer_transaction)
+        customerTransactionID = cursor.fetchone()[0]
+        return customerTransactionID
         
-def delete_customer(id):
+def delete_customers_transactions(id):
     query = "DELETE FROM Customers_Transactions WHERE(CustomerTransactionID = %s)"
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -36,7 +47,7 @@ def delete_customer(id):
     except:
         return False
 
-def update_customer(id,Customer_Transaction):
+def update_customers_transactions(id,Customer_Transaction):
     query = "UPDATE Customers_Transactions SET TransactionDate=%s, AmountExcludingTax=%s, TaxAmount=%s, TransactionAmount=%s, OutstandingBalance=%s, FinalizationDate=%s, IsFinalize=%s WHERE (CustomerTransactionID = %s)"
     customer_transaction = Customer_Transaction.get()
     try:
@@ -47,7 +58,3 @@ def update_customer(id,Customer_Transaction):
     except sqlite3.Error as er:
         # get the extended result code here
         return False 
-
-
-
-
