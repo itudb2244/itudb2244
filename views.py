@@ -26,8 +26,8 @@ def delete_customer(id):
     return render_template("customers.html", customers=customers)
 
 def people_page():
-    people = peopleService.get_people()
-    return render_template("customers.html", title="People", table=people)
+    #people = peopleService.get_people()
+    return render_template("customers.html")
 
 def add_people_page():
     

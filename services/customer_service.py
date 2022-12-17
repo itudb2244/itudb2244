@@ -3,7 +3,7 @@ import sqlite3
 from models import Customer
 
 def get_customers():
-    query = 'SELECT * FROM Customers, People WHERE( (Customers.CustomerID = %s) AND (Customers.primaryContactPersonID=People.personID))'
+    query = 'SELECT * FROM Customers'
     customers = []
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
