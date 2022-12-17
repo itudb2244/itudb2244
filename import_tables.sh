@@ -27,7 +27,7 @@ create table if not exists Customers(
 CustomerID INT PRIMARY KEY,
 CustomerName TEXT,
 PrimaryContactPersonID INT REFERENCES People(PersonID) ON DELETE CASCADE,
-PhoneNumber INT,
+PhoneNumber TEXT,
 WebsiteURL TEXT,
 DeliveryAddressLine1 TEXT,
 DeliveryAddressLine2 TEXT
@@ -95,6 +95,7 @@ PickingCompletedWhen TEXT
 );
 
 create table if not exists StockItemHoldings(
+StockItemHoldingID INT PRIMARY KEY,
 StockItemID INT REFERENCES StockItems(StockItemID) ON DELETE CASCADE,
 QuantityOnHand INT,
 BinLocation TEXT, 
