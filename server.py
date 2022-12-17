@@ -9,9 +9,11 @@ def create_app():
 
     #CustomerTable = views.CustomerTable()
     app.add_url_rule("/", view_func=views.home_page)
-    app.add_url_rule("/customers", endpoint="Customers_page", view_func=views.customers_page, methods=["GET","POST"])
-    app.add_url_rule("/customers/add-customer", endpoint="Customers_add", view_func=views.add_customers_page,  methods=["POST"])
-    app.add_url_rule("/customer/<int:id>", endpoint="Customers_get", view_func=views.get_customer, methods=["GET", "POST"])
+    app.add_url_rule("/customers", endpoint="Customers_page", view_func=views.CustomerTable().get_table, methods=["GET","POST"])
+    app.add_url_rule("/customers/add-customer", endpoint="Customers_add", view_func=views.CustomerTable().add_row,  methods=["POST"])
+    app.add_url_rule("/customers/delete-customer", endpoint="Customers_delete", view_func=views.CustomerTable().delete_row, methods=["GET", "POST"])
+    # app.add_url_rule("/customer/<int:id>", endpoint="Customers_get", view_func=views.get_customer, methods=["GET", "POST"])
+
 
     app.config["dbname"] = "import_test.db"
 

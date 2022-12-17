@@ -70,7 +70,9 @@ class Service():
 
         
     def delete_row(self, id, idColumn):
-        query = "DELETE FROM "+self.object_type+" WHERE("+idColumn+" = "+str(id)
+        query = "DELETE FROM "+self.table+" WHERE("+idColumn+" = "+str(id)+")"
+
+        print(query)
 
         try:
             with sqlite3.connect(current_app.config["dbname"]) as connection:

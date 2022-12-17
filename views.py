@@ -12,7 +12,7 @@ class Table():
     def get_table(self):
         service = self.service()
         data = service.get_data()
-        return render_template("generic_list.html", title=type, table=data)
+        return render_template("generic_list.html", title=self.type, table=data)
 
     def add_row(self):
         row = []
@@ -25,11 +25,22 @@ class Table():
 
         obj = self.data_class(row)
 
-        self.service.add_row(obj)
+        service = self.service()
+        service.add_row(obj)
 
         return redirect(url_for(self.type + "_page"))
 
-    # def delete_row(self, id, type):
+    def delete_row(self):
+        idString = request.args.get("id")
+        id = idString.split("'")[1]
+
+        idColumn = self.data_class.getColumns()[0]
+
+        service = self.service()
+        service.delete_row(id, idColumn)
+
+        return redirect(url_for(self.type + "_page"))
+
         
 
 

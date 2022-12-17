@@ -1,35 +1,19 @@
 {% extends "layout.html" %}
 {% block title %}{{ title }}{% endblock %}
-{% block content %}   
- <!-- <div class="btn-group btn-group-toggle m-5" data-toggle="buttons">
-   <div class="btn-group btn-group-toggle m-5" data-toggle="buttons">
-    <label class="btn btn-info btn-lg active">
-      <input type="radio" name="options" id="Users" autocomplete="off" checked> Users
-    </label>
-      <input type="radio" name="options" id="Employee" autocomplete="off"> Employee
-    </label>
-    <label class="btn btn-info btn-lg">
-      <input type="radio" name="options" id="SalesPerson" autocomplete="off"> SalesPerson
-      <a type="radio" name="options" id="SalesPerson" autocomplete="off" href="{{ url_for('add_customers_page') }}">Add Customer Page</a>
-    </label>
-  </div>
-  <u1>
-    <li><a href="{{ url_for('add_customers_page') }}">Add Customer Page </a></li>
-    </u1>
-  </div> -->
+{% block content %}  
 
   <div class="btn-group btn-group-toggle m-5" data-toggle="buttons">
     <label class="btn btn-info btn-lg">
-      <a type="radio" name="options" id="Find Customer" autocomplete="off" href="{{ url_for('add_customers_page') }}" style="color: white">Find Customer</a>
+      <a type="radio" name="options" id="Find Customer" autocomplete="off" href="" style="color: white">Find Customer</a>
     </label>
     <label class="btn btn-info btn-lg">
-      <a type="radio" name="options" id="Add Customer" autocomplete="off" href="{{ url_for('add_customers_page') }}" style="color: white">Add Customer</a>
+      <a type="radio" name="options" id="Add Customer" autocomplete="off" href="" style="color: white">Add Customer</a>
     </label>
     <label class="btn btn-info btn-lg">
-      <a type="radio" name="options" id="Update Customer" autocomplete="off" href="{{ url_for('add_customers_page') }}" style="color: white">Update Customer</a>
+      <a type="radio" name="options" id="Update Customer" autocomplete="off" href="" style="color: white">Update Customer</a>
     </label>
     <label class="btn btn-info btn-lg">
-      <a type="radio" name="options" id="Delete Customer" autocomplete="off" href="{{ url_for('add_customers_page') }}" style="color: white">Delete Customer</a>
+      <a type="radio" name="options" id="Delete Customer" autocomplete="off" href="" style="color: white">Delete Customer</a>
     </label>
   </div> 
 
