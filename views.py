@@ -7,7 +7,7 @@ def home_page():
 
 def customers_page():
     customers = customerService.get_customers()
-    return render_template("customers.html", customers=customers)
+    return render_template("customers.html", title="Customers", table=customers)
 
 def add_customers_page():
     return render_template("AddCustomer.html")
@@ -42,7 +42,6 @@ def add_invoice_lines_page():
 
 
 def invoices_page():
-    
     return render_template("Invoices.html")
 
 def add_invoices_page():
