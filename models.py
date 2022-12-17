@@ -233,7 +233,8 @@ class People(object):
         return copy.deepcopy(self)
 
 class StockItemHoldings(object):
-    def __init__(self, StockItemID,QuantityOnHand,BinLocation,LastStocktakeQuantity,LastCostPrice,ReorderLevel,TargetStockLevel):
+    def __init__(self, StockItemHoldingID, StockItemID,QuantityOnHand,BinLocation,LastStocktakeQuantity,LastCostPrice,ReorderLevel,TargetStockLevel):
+        self.StockItemHoldingID=StockItemHoldingID
         self.StockItemID =StockItemID
         self.QuantityOnHand =QuantityOnHand
         self.BinLocation =BinLocation
