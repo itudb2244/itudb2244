@@ -8,7 +8,7 @@ def create_app():
     app.config.from_object("settings")
 
     app.add_url_rule("/", view_func=views.home_page)
-    app.add_url_rule("/customers", view_func=views.customers_page)
+    app.add_url_rule("/customers", view_func=views.customers_page, methods=["GET","POST"])
     app.add_url_rule("/people", view_func=views.people_page,methods=["GET","POST"])
     app.add_url_rule("/customer-transactions", view_func=views.customer_transactions_page,methods=["GET","POST"])
     app.add_url_rule("/invoice-lines", view_func=views.invoice_lines_page,methods=["GET","POST"])
@@ -32,12 +32,7 @@ def create_app():
     app.add_url_rule("/stockitem-transactions/add-stockitem-transactions", view_func=views.add_stockitem_transactions_page,methods=["GET","POST"])
 
 
-<<<<<<< HEAD
     app.add_url_rule("/customer/<int:id>", view_func=views.get_customer, methods=["GET", "POST"])
-=======
-    app.add_url_rule("/delete_customer/<string:id>", view_func=views.delete_customer,methods=['GET'])
->>>>>>> 3ba7f8e81a47f5d03bedf4532ae2c440f283a3cd
-
 
     app.config["dbname"] = "import_test.db"
 
