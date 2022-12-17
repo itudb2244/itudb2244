@@ -3,7 +3,7 @@
 cd Tables
 rm ../import_test.db
     sqlite3 ../import_test.db << EOF
-create table People(
+create table if not exists  People(
 PersonID INT PRIMARY KEY,
 FullName TEXT,
 LogonName TEXT,
@@ -12,9 +12,10 @@ IsSystemUser INT,
 IsEmployee INT,
 IsSalesperson INT,
 PhoneNumber TEXT,
-EmailAddress TEXT);
+EmailAddress TEXT
+);
 
-create table StockItems(
+create table if not exists StockItems(
 StockItemID INT PRIMARY KEY,
 StockItemName TEXT,
 LeadTimeDays INT,
@@ -22,20 +23,21 @@ UnitPrice REAL,
 RecommendedRetailPrice REAL
 );
 
-create table Customers(
+create table if not exists Customers(
 CustomerID INT PRIMARY KEY,
 CustomerName TEXT,
-PrimaryContactPersonID INT REFERENCES People(PersonID),
+PrimaryContactPersonID INT REFERENCES People(PersonID) ON DELETE CASCADE,
 PhoneNumber INT,
 WebsiteURL TEXT,
 DeliveryAddressLine1 TEXT,
-DeliveryAddressLine2 TEXT);
+DeliveryAddressLine2 TEXT
+);
 
 
-create table InvoiceLines(
+create table if not exists InvoiceLines(
 InvoiceLineID INT PRIMARY KEY,
-InvoiceID INT REFERENCES Invoices(InvoiceID),
-StockItemID INT REFERENCES StockItems(StockItemID),
+InvoiceID INT REFERENCES Invoices(InvoiceID) ON DELETE CASCADE,
+StockItemID INT REFERENCES StockItems(StockItemID) ON DELETE CASCADE,
 Description TEXT,
 Quantity INT,
 UnitPrice REAL,
@@ -43,12 +45,12 @@ LineProfit REAL,
 ExtendedPrice REAL
 );
 
-create table Invoices( 
+create table if not exists Invoices( 
 InvoiceID INT PRIMARY KEY,
-CustomerID INT REFERENCES Customers(CustomerID),
-OrderID	INT REFERENCES Orders(OrderID),
-ContactPersonID INT REFERENCES People(PersonID),
-AccountsPersonID INT REFERENCES People(PersonID),
+CustomerID INT REFERENCES Customers(CustomerID) ON DELETE CASCADE,
+OrderID	INT REFERENCES Orders(OrderID) ON DELETE CASCADE,
+ContactPersonID INT REFERENCES People(PersonID) ON DELETE CASCADE,
+AccountsPersonID INT REFERENCES People(PersonID) ON DELETE CASCADE,
 InvoiceDate TEXT,
 CustomerPurchaseOrderNumber INT,
 DeliveryInstructions TEXT,
@@ -59,10 +61,10 @@ ReturnedDeliveryData TEXT,
 ConfirmedDeliveryTime TEXT,
 ConfirmedReceivedBy TEXT);
 
-create table CustomerTransactions(
+create table if not exists CustomerTransactions(
 CustomerTransactionID INT PRIMARY KEY,
-CustomerID INT REFERENCES Customers(CustomerID) ,
-InvoiceID INT REFERENCES Invoices(InvoiceID) NULL,
+CustomerID INT REFERENCES Customers(CustomerID) ON DELETE CASCADE,
+InvoiceID INT REFERENCES Invoices(InvoiceID) NULL ON DELETE CASCADE,
 TransactionDate TEXT,
 AmountExcludingTax REAL,
 TaxAmount REAL,
@@ -72,19 +74,19 @@ FinalizationDate TEXT,
 IsFinalized INT
 );
 
-create table OrderLines(
+create table if not exists OrderLines(
 OrderLineID INT PRIMARY KEY,
-OrderID INT REFERENCES Orders(OrderID),
-StockItemID INT REFERENCES StockItems(StockItemID),
+OrderID INT REFERENCES Orders(OrderID) ON DELETE CASCADE,
+StockItemID INT REFERENCES StockItems(StockItemID) ON DELETE CASCADE,
 Description TEXT,
 Quantity INT,
 UnitPrice REAL,
 PickedQuantity INT,
 PickingCompletedWhen TEXT);
 
-create table Orders(
+create table if not exists Orders(
 OrderID INT PRIMARY KEY,
-CustomerID INT REFERENCES Customers(CustomerID),
+CustomerID INT REFERENCES Customers(CustomerID) ON DELETE CASCADE,
 OrderDate TEXT,
 ExpectedDeliveryDate TEXT,
 CustomerPurchaseOrderNumber INT,
@@ -92,9 +94,8 @@ IsUndersupplyBackordered INT,
 PickingCompletedWhen TEXT
 );
 
-
-create table StockItemHoldings(
-StockItemID INT REFERENCES StockItems(StockItemID),
+create table if not exists StockItemHoldings(
+StockItemID INT REFERENCES StockItems(StockItemID) ON DELETE CASCADE,
 QuantityOnHand INT,
 BinLocation TEXT, 
 LastStocktakeQuantity INT,
@@ -103,11 +104,11 @@ ReorderLevel INT,
 TargetStockLevel INT);
 
 
-create table StockItemTransactions(
+create table if not exists StockItemTransactions(
 StockItemTransactionID INT,
-StockItemID INT REFERENCES StockItems(StockItemID),
-CustomerID INT REFERENCES Customers(CustomerID),
-InvoiceID INT REFERENCES Invoices(InvoiceID),
+StockItemID INT REFERENCES StockItems(StockItemID) ON DELETE CASCADE,
+CustomerID INT REFERENCES Customers(CustomerID) ON DELETE CASCADE,
+InvoiceID INT REFERENCES Invoices(InvoiceID) ON DELETE CASCADE,
 TransactionOccurredWhen TEXT,
 Quantity INT
 );
