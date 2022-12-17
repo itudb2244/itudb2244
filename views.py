@@ -50,8 +50,7 @@ class CustomerTable(Table):
         
 
 def home_page():
-    #return render_template("home.html")
-    return redirect(url_for("customers_page"))
+    return render_template("home.html")
 
 
 def customers_page():
