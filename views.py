@@ -32,8 +32,9 @@ class Table():
 
     def delete_row(self):
         idString = request.args.get("id")
-        id = idString.split("'")[1]
-        print(idString)
+        idString.replace("'", "")
+        id = idString.split("[")[1].split(",")[0]
+
         idColumn = self.data_class.getColumns()[0]
 
         service = self.service()
