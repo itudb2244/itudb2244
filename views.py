@@ -10,12 +10,12 @@ def home_page():
 def customers_page():
     service = CustomerService()
     customers = service.get_data()
-    return render_template("customers.html", title="Customers", table=customers)
+    return render_template("generic_list.html", title="Customers", table=customers)
 
 def get_customer(id):
     service = CustomerService()
     customer = service.get_rows_by_column(id, "CustomerID")
-    return render_template("customers.html", title="Get Customer", table=customer)
+    return render_template("generic_list.html", title="Get Customer", table=customer)
 
 def add_customers_page():
     return render_template("customers.html")
@@ -23,6 +23,28 @@ def add_customers_page():
 
 
 def customer_transactions_page():
+    service = CustomerTransactionService()
+    customer_transactions = service.get_data()
+    return render_template("customers.html", title="Customer Transactions", table=customer_transactions)
+
+def get_customer_transactions(id):
+    service = CustomerTransactionService()
+    customer_transaction = service.get_rows_by_column(id, "CustomerTransactionID")
+    return render_template("customers.html", title="Get Customer Transaction", table=customer_transaction)
+def people_page():
+    service = PeopleService()
+    people = service.get_data()
+    
+    return render_template("generic_list.html", title="People", peoples=people)
+
+def add_people_page():
+    
+    return render_template("AddPeople.html")
+
+
+def customer_transactions_page():
+    
+    return render_template("generic_list.html")
     service = CustomerTransactionService()
     customer_transactions = service.get_data()
     return render_template("customers.html", title="Customer Transactions", table=customer_transactions)
