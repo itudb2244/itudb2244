@@ -3,7 +3,7 @@ import sqlite3
 from models import OrderLines
 
 def get_order_lines():
-    query = 'SELECT * FROM Order_Lines, Orders, Stock_Item WHERE((Order_Lines.orderID=Orders.orderID) AND (Order_Lines.stockItemID=Stock_Item=stockItemID))'
+    query = "SELECT * FROM ORDER_LINES, Orders, Stock_Item WHERE((ORDER_LINES.orderID=ORDERS.orderID) AND (ORDER_LINES.stockItemID=STOCK_ITEMS.stockItemID))"
     order_lines = []
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -15,7 +15,7 @@ def get_order_lines():
     return order_lines
 
 def get_order_line(id):
-    query = "SELECT * FROM Order_Lines, Orders, Stock_Item WHERE(Order_Lines.OrderLineID = %s) AND ((Order_Lines.orderID=Orders.orderID) AND (Order_Lines.stockItemID=Stock_Item=stockItemID))"
+    query = "SELECT * FROM ORDER_LINES, ORDERS, STOCK_ITEMS WHERE(ORDER_LINES.orderLineID = %s) AND ((ORDER_LINES.orderID=ORDERS.orderID) AND (ORDER_LINES.stockItemID=STOCK_ITEMS.stockItemID))"
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
         cursor = connection.cursor()
@@ -27,7 +27,7 @@ def get_order_line(id):
     return None
 
 def add_order_line(Order_Line):
-    query = "INSERT INTO Order_Lines (orderID, stockItemID, description, quantity, unitPrice, pickedQuantity, pickingCompletedWhen)"\
+    query = "INSERT INTO ORDER_LINES (orderID, stockItemID, description, quantity, unitPrice, pickedQuantity, pickingCompletedWhen)"\
             "VALUES (%(orderID)s,%(stockItemID)s,%(description)s,%(quantity)s,%(unitPrice)s,%(pickedQuantity)s,%(pickingCompletedWhen)s)"\
             "RETURNING orderLineID"
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -38,7 +38,7 @@ def add_order_line(Order_Line):
         return orderLineID
         
 def delete_order_line(id):
-    query = "DELETE FROM Order_Lines WHERE(orderLineID = %s)"
+    query = "DELETE FROM ORDER_LINES WHERE(orderLineID = %s)"
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:
             cursor = connection.cursor()
@@ -48,12 +48,12 @@ def delete_order_line(id):
         return False
 
 def update_order_line(id,Order_Line):
-    query = "UPDATE Order_Lines SET Description=%s, Quantity=%s, UnitPrice=%s, PickedQuantity=%s, PickingCompletedWhen=%s WHERE (OrderLineID = %s)"
+    query = "UPDATE ORDER_LINES SET orderID=%s, stockItemID=%s, description=%s, quantity=%s, unitPrice=%s, pickedQuantity=%s, pickingCompletedWhen=%s WHERE (orderLineID = %s)"
     order_line = Order_Line.get()
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:
             cursor = connection.cursor()
-            cursor.execute(query,(order_line['Description'], order_line['Quantity'], order_line['UnitPrice'], order_line['PickedQuantity'], order_line['PickingCompletedWhen'], id))
+            cursor.execute(query,(order_line['OrderID'], order_line['StockItemID'], order_line['Description'], order_line['Quantity'], order_line['UnitPrice'], order_line['PickedQuantity'], order_line['PickingCompletedWhen'], id))
             return True
     except sqlite3.Error as er:
         # get the extended result code here

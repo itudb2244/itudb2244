@@ -3,7 +3,7 @@ import sqlite3
 from models import InvoiceLines
 
 def get_invoice_lines():
-    query = 'SELECT * FROM Invoice_Lines'
+    query = "SELECT * FROM INVOICE_LINES, INVOICES, STOCK_ITEMS WHERE((INVOICE_LINES.invoiceID=INVOICES.invoiceID) AND (INVOICE_LINES.stockItemID=STOCK_ITEMS.stockItemID))"
     invoice_lines = []
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -15,7 +15,7 @@ def get_invoice_lines():
     return invoice_lines
 
 def get_invoice_line(id):
-    query = "SELECT * FROM Invoice_Lines WHERE(Invoice_Lines.InvoiceLineID = %s)"
+    query = "SELECT * FROM INVOICE_LINES, INVOICES, STOCK_ITEMS WHERE((INVOICE_LINES.invoiceLineID = %s) AND (INVOICE_LINES.invoiceID=INVOICES.invoiceID) AND (INVOICE_LINES.stockItemID=STOCK_ITEMS.stockItemID))"
 
     with sqlite3.connect(current_app.config["dbname"]) as connection:
         cursor = connection.cursor()
@@ -27,7 +27,7 @@ def get_invoice_line(id):
     return None
 
 def add_invoice_line(Invoice_line):
-    query = "INSERT INTO Invoice_Lines (invoiceID, stockItemID, description, quantity, unitPrice, lineProfit, extendedPrice)"\
+    query = "INSERT INTO INVOICE_LINES (invoiceID, stockItemID, description, quantity, unitPrice, lineProfit, extendedPrice)"\
             "VALUES (%(invoiceID)s,%(stockItemID)s,%(description)s,%(quantity)s,%(unitPrice)s,%(lineProfit)s,%(extendedPrice)s)"\
             "RETURNING invoiceLineID"
     with sqlite3.connect(current_app.config["dbname"]) as connection:
@@ -38,7 +38,7 @@ def add_invoice_line(Invoice_line):
         return invoiceLineID
         
 def delete_invoice_line(id):
-    query = "DELETE FROM Invoice_Lines WHERE(InvoiceLineID = %s)"
+    query = "DELETE FROM INVOICE_LINES WHERE(invoiceLineID = %s)"
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:
             cursor = connection.cursor()
@@ -48,7 +48,7 @@ def delete_invoice_line(id):
         return False
 
 def update_invoice_line(id, Invoice_line):
-    query = "UPDATE Invoice_Lines SET Description=%s, Quantity=%s, UnitPrice=%s, LineProfit=%s, ExtendedPrice=%s WHERE (InvoiceLineID = %s)"
+    query = "UPDATE INVOICE_LINES SET description=%s, quantity=%s, unitPrice=%s, lineProfit=%s, extendedPrice=%s WHERE (invoiceLineID = %s)"
     invoice_line = Invoice_line.get()
     try:
         with sqlite3.connect(current_app.config["dbname"]) as connection:

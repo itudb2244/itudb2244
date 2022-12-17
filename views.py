@@ -1,16 +1,27 @@
 from flask import current_app, render_template
 import services.customer_service as customerService
+<<<<<<< HEAD
 
 from services.service import *
+=======
+import sqlite3 as sql
+import services.orders_service as ordersService
+>>>>>>> 3ba7f8e81a47f5d03bedf4532ae2c440f283a3cd
 
 def home_page():
     return render_template("home.html")
 
 
 def customers_page():
+<<<<<<< HEAD
     service = CustomerService()
     customers = service.get_data()
     return render_template("customers.html", title="Customers", table=customers)
+=======
+    customers = customerService.get_customers()
+    return render_template("generic_list.html", title="Customers", table=customers)
+
+>>>>>>> 3ba7f8e81a47f5d03bedf4532ae2c440f283a3cd
 
 def get_customer(id):
     service = CustomerService()
@@ -18,15 +29,28 @@ def get_customer(id):
     return render_template("customers.html", title="Get Customers", table=customers)
 
 def add_customers_page():
+    
     return render_template("AddCustomer.html")
 
 
 
+def delete_customer(id):
+   
+    customerService.delete_customer(id)
+    customers = customerService.get_customers()
+
+    return render_template("customers.html", customers=customers)
+
 def people_page():
+<<<<<<< HEAD
     service = PeopleService()
     people = service.get_data()
     
     return render_template("customers.html", title="People", table=people)
+=======
+    #people = peopleService.get_people()
+    return render_template("customers.html")
+>>>>>>> 3ba7f8e81a47f5d03bedf4532ae2c440f283a3cd
 
 def add_people_page():
     
