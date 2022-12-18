@@ -4,10 +4,20 @@
     <th scope="column"> </th>
     <th scope="column"> </th>
 
+    <a style="color:white; text-decoration: none; display:inline-block; margin-bottom: 25px;;">
+      <button class="update-btn">
+        Previous
+      </button>
+      <button class="update-btn">
+        Next
+      </button>
+    </a>
+
+
     {% for keys in table_object[0].__dict__.keys() %}
     <div>
      
-    <th class="" scope="column"> 
+    <th class="" scope="column" > 
       {{ keys }}
     <a   style="color:white; text-decoration: none; position: absolute;"
       href="">
@@ -38,7 +48,7 @@
         </td>
         {% for keys in table_object[0].__dict__.keys() %}
 
-        <th scope="column">
+        <th scope="column" >
           <div class="formbold-input-group">
             <label for="{{ keys }}" class="formbold-form-label"></label>
             <input type="text" name='{{ keys }}' id='{{ keys }}' placeholder='{{ keys }}' class="formbold-form-input"
