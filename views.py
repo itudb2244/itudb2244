@@ -102,7 +102,6 @@ class OrdersTable(Table):
     def __init__(self):
         super().__init__("Orders", OrderService, Orders)
 
-
 class CustomerTransactionsTable(Table):
     def __init__(self):
         super().__init__("CustomerTransactions", CustomerTransactionService, CustomerTransactions)

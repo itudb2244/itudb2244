@@ -176,9 +176,9 @@ class OrderLines(object):
         orderlines = {
             'OrderLineID': self.OrderLineID,
             'OrderID': self.OrderID,
-            'OrderID': self.OrderID,
             'StockItemID': self.StockItemID,
             'Description': self.Description,
+            'UnitPrice': self.Description,
             'Quantity': self.Quantity,
             'PickedQuantity': self.PickedQuantity,
             'PickingCompletedWhen': self.PickingCompletedWhen,
@@ -190,6 +190,14 @@ class OrderLines(object):
 
     def getCopy(self):
         return copy.deepcopy(self)
+
+    def getNonKeyColumns():
+        return ["Description", "UnitPrice", "Quantity", "PickedQuantity", "PickingCompletedWhen"]
+
+    def getColumns():
+        return ["OrderLineID", "OrderID", "StockItemID", "Description", "UnitPrice", "Quantity", "PickedQuantity", "PickingCompletedWhen"]
+
+
 
 class Orders(object):
     def __init__(self, row):
