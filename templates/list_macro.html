@@ -6,11 +6,11 @@
 
     <div style="margin-bottom:30px; margin-left: 15px; margin-top: 15px;">
       <a style="color:white; text-decoration: none; position: relative;"
-        href="">
+        href="{{url_for(title + '_page', page=context.page-1)}}">
         <img class=" mx-2" src="/static/previous.png" style="width:18px;height:18px;">
       </a>
       <a style="color:white; text-decoration: none; position: relative;"
-        href="">
+        href="{{url_for(title + '_page', page=context.page+1)}}">
         <img class=" mx-2" src="/static/next.png" style="width:18px;height:18px;">
       </a>
     </div>

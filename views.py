@@ -8,6 +8,7 @@ class Context():
         self.isEdit = False
         self.selectedID = 0
         self.selectedIDColumn = 0
+        self.page = 1
 
 class Table():
     def __init__(self, type, service, data_class):
@@ -18,11 +19,17 @@ class Table():
 
     def get_table(self, page):
         service = self.service()
+
+        if page <= 0:
+            return redirect(url_for(self.type+"_page", page=1))
+
         data = service.get_data(page)
 
         self.page = page
+        context = Context()
+        context.page = self.page
 
-        return render_template("generic_list.html", title=self.type, table=data, context=Context())
+        return render_template("generic_list.html", title=self.type, table=data, context=context)
 
     def add_row(self):
         row = []
