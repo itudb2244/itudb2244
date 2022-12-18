@@ -92,7 +92,12 @@ class Table():
 class CustomerTable(Table):
     def __init__(self):
         super().__init__("Customers", CustomerService, Customer)
-        
+
+
+class InvoicesTable(Table):
+    def __init__(self):
+        super().__init__("Invoices", InvoiceService, Invoices)
+           
 
 def home_page():
     return render_template("home.html")        
