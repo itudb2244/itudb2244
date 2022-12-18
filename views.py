@@ -84,7 +84,6 @@ class Table():
             
             service = self.service()
             search_data = service.search_and_list(request.form)
-
             return render_template("generic_list.html", title=self.type, table=search_data, context=Context())
 
         

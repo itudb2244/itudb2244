@@ -33,7 +33,7 @@ class Customer(object):
         return copy.deepcopy(self)
 
     def getNonKeyColumns():
-        return ["CustomerName", "PhoneNumber", "WebsiteURL", "DeliveryAddressLine1", "DeliveryAddressLine2"]
+        return ["CustomerName", "PrimaryContactPersonID", "PhoneNumber", "WebsiteURL", "DeliveryAddressLine1", "DeliveryAddressLine2"]
 
     def getColumns():
         return ["CustomerID", "CustomerName", "PrimaryContactPersonID", "PhoneNumber", "WebsiteURL", "DeliveryAddressLine1", "DeliveryAddressLine2"]

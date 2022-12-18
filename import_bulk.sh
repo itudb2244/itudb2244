@@ -34,8 +34,6 @@ select * from CustomerTransactions;
 select * from OrderLines;
 .output Orders.csv
 select * from Orders;
-.output StockItemHoldings.csv
-select * from StockItemHoldings;
 .output StockItemTransactions.csv
 select * from StockItemTransactions;
 
