@@ -70,8 +70,6 @@ class Service():
     def delete_row(self, id, idColumn):
         query = "DELETE FROM "+self.table+" WHERE("+idColumn+" = "+str(id)+")"
 
-        print(query)
-
         try:
             with sqlite3.connect(current_app.config["dbname"]) as connection:
                 cursor = connection.cursor()
@@ -81,8 +79,32 @@ class Service():
         except:
             return False
 
-    def update_row(self, id, idColumn):
-        pass
+    def update_row(self, data, id , idColumn):
+        column_datas = data.toDict().values()
+
+        # "UPDATE Customers SET CustomerName=Eymen, WebsiteURL=eymen.com"
+        query = "UPDATE "+self.table+" SET "
+
+        columns = self.object_type.getColumns()
+        for i,column in enumerate(columns):
+            if column in self.object_type.getNonKeyColumns():
+                query += column + "=" + column_datas[i]
+                if i != len(columns)-1:
+                    query += ", "
+        query += " WHERE (" + idColumn + " = " + str(id)
+
+        print(query)
+
+        try:
+            with sqlite3.connect(current_app.config["dbname"]) as connection:
+                cursor = connection.cursor()
+                cursor.execute(query)
+
+                return True
+        except:
+            return False
+
+
 
 class CustomerService(Service):
     def __init__(self):

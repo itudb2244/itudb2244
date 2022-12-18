@@ -28,7 +28,7 @@ class Table():
             if column in self.data_class.getNonKeyColumns():
                 row.append(request.form[column])
             else:
-                row.append(-1)
+                row.append(None)
 
         obj = self.data_class(row)
 
@@ -36,23 +36,6 @@ class Table():
         service.add_row(obj)
 
         return redirect(url_for(self.type + "_page"))
-
-    def update_row_view(self):
-        idString = request.args.get("id")
-        idString = idString.replace("'", "")
-        id = idString.split("[")[1].split(",")[0]
-
-        # id = int(id)
-        idColumn = self.data_class.getColumns()[0]
-        service = self.service()
-        data = service.get_data()
-        context = Context()
-        
-        context.isEdit = True
-        context.selectedID = id
-        context.selectedIDColumn = idColumn
-
-        return render_template("generic_list.html", title=self.type, table=data, context=context)
 
     def update_row(self):
         idString = request.args.get("update_id")
@@ -70,8 +53,18 @@ class Table():
             context.selectedIDColumn = idColumn
             return render_template("generic_list.html", title=self.type, table=data, context=context)
         else:
+            row = []
+            columns = self.data_class.getColumns()
+            for column in columns:
+                if column in self.data_class.getNonKeyColumns():
+                    row.append(request.form[column])
+                else:
+                    row.append(None)
+
+            obj = self.data_class(row)
+
             service = self.service()
-            service.update_row(id, idColumn)
+            service.update_row(obj, id, idColumn)
             return redirect(url_for(self.type + "_page"))
 
 
