@@ -1,84 +1,91 @@
 {% macro list_all(table_object, title, context) %}
-    <table class="table">
-      <thead>
-            <th scope="column">Update</th>
-            <th scope="column">Add/Delete</th>
+<table class="table">
+  <thead>
+    <th scope="column">Update</th>
+    <th scope="column">Add/Delete</th>
 
-          {% for keys in table_object[0].__dict__.keys() %}
-            <th scope="column">{{ keys }}</th>
-          {% endfor %}
+    {% for keys in table_object[0].__dict__.keys() %}
+    <th scope="column">{{ keys }}</th>
+    {% endfor %}
 
 
-      </thead>
-      
-      <tbody>
-        <tr>
-          <form method="POST" action="{{url_for(title + '_add')}}">
-            <td>
-              <button class="del-btn" style="background-color:rgb(36, 228, 74); margin-top: 16px;">
-                <a style="color:white; text-decoration: none;" href="">add</a>
-              </button>
-            </td>
-            {% for keys in table_object[0].__dict__.keys() %}
-            
-            <th scope="column">
-              <div class="formbold-input-group">
-                <label for="{{ keys }}" class="formbold-form-label" ></label>
-                <input
-                  type="text"
-                  name='{{ keys }}'
-                  id='{{ keys }}'
-                  placeholder='{{ keys }}'
-                  class="formbold-form-input"
-                  style="font-size:12px"
-                />
-              </div>
-            </th>
-            {% endfor %}
-          </form>
-        </tr>
-        
-        {% for iter in table_object %}
-        
-        <tr>
-            {% if iter[context.selectedIDColumn] == context.selectedID %}
-            <form method="POST" action="{{url_for(title + '_update', update_id=iter.__dict__.values())}}">
-              <td>
-                <a style="color:white; text-decoration: none;">
-                  <button class="update-btn">
-                    Done
-                  </button>
-                </a>
-              </td>
-            </form>
-            {%else %}
+  </thead>
 
-              <td>
-            <a style="color:white; text-decoration: none;" href="{{url_for(title + '_update', update_id=iter.__dict__.values())}}">
+  <tbody>
+    <tr>
+      <form method="POST" action="{{url_for(title + '_add')}}">
+        <td>
+          <button class="del-btn" style="background-color:rgb(36, 228, 74); margin-top: 16px;">
+            <a style="color:white; text-decoration: none;" href="">add</a>
+          </button>
+        </td>
+        {% for keys in table_object[0].__dict__.keys() %}
+
+        <th scope="column">
+          <div class="formbold-input-group">
+            <label for="{{ keys }}" class="formbold-form-label"></label>
+            <input type="text" name='{{ keys }}' id='{{ keys }}' placeholder='{{ keys }}' class="formbold-form-input"
+              style="font-size:12px" />
+          </div>
+        </th>
+        {% endfor %}
+      </form>
+    </tr>
+
+    {% for iter in table_object %}
+
+    <tr>
+      <td>
+        <a style="color:white; text-decoration: none;"
+          href="{{url_for(title + '_delete', delete_id=iter.__dict__.values())}}">
+          <button class="del-btn">
+            delete
+          </button>
+        </a>
+      </td>
+      {% if iter[context.selectedIDColumn] == context.selectedID %}
+      <form method="POST" action="{{url_for(title + '_update', update_id=iter.__dict__.values())}}">
+        <td>
+          <a style="color:white; text-decoration: none;">
             <button class="update-btn">
-                update {{context.selectedID, iter[context.selectedIDColumn]}}
-            </button>
-              </a>
-          </td>
-            {% endif%}
-          <td>
-            <a style="color:white; text-decoration: none;" href="{{url_for(title + '_delete', delete_id=iter.__dict__.values())}}">
-            <button class="del-btn">
-              delete
+              Done
             </button>
           </a>
-          </td>
-        {% for key in iter.__dict__.keys() %}
-            {% if key == iter.__dict__.keys()[0] %}
-            
-                <th scope="row">{{ iter[key] }}</th>
-            {% else %}
-              <td>{{ iter[key] }}</td>
-            {% endif %}
-        {% endfor %}
+        </td>
 
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+      {%else %}
+
+      <td>
+        <a style="color:white; text-decoration: none;"
+          href="{{url_for(title + '_update', update_id=iter.__dict__.values())}}">
+          <button class="update-btn">
+            update {{context.selectedID, iter[context.selectedIDColumn]}}
+          </button>
+        </a>
+      </td>
+      {% endif%}
+
+      {% if context.isEdit == True and iter[context.selectedIDColumn] == context.selectedID %}
+   
+          {% for keys in table_object[0].__dict__.keys() %}
+
+          <th scope="column">
+            <div class="formbold-input-group">
+              <label for="{{ keys }}" class="formbold-form-label"></label>
+              <input type="text" name='{{ keys }}' id='{{ keys }}' placeholder='{{ keys }}' class="formbold-form-input"
+                style="font-size:12px" />
+            </div>
+          </th>
+          {% endfor %}
+        </form>
+      {%else %}
+
+      {% for key in iter.__dict__.keys() %}
+      <td>{{ iter[key] }}</td>
+      {% endfor %}
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endmacro %}
