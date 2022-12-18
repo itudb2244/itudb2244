@@ -185,7 +185,7 @@ class OrderLines(object):
             'OrderID': self.OrderID,
             'StockItemID': self.StockItemID,
             'Description': self.Description,
-            'UnitPrice': self.Description,
+            'UnitPrice': self.UnitPrice,
             'Quantity': self.Quantity,
             'PickedQuantity': self.PickedQuantity,
             'PickingCompletedWhen': self.PickingCompletedWhen,

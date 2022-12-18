@@ -39,6 +39,12 @@ def create_app():
     app.add_url_rule("/customer-transactions/update", endpoint="CustomerTransactions_update", view_func=views.CustomerTransactionsTable().update_row, methods=["GET", "POST"])
     app.add_url_rule("/customer-transactions/search", endpoint="CustomerTransactions_search", view_func=views.CustomerTransactionsTable().search, methods=["GET", "POST"])
 
+    app.add_url_rule("/order-lines", endpoint="OrderLines_page", view_func=views.OrderLinesTable().get_table, methods=["GET","POST"])
+    app.add_url_rule("/order-lines/add", endpoint="OrderLines_add", view_func=views.OrderLinesTable().add_row,  methods=["POST"])
+    app.add_url_rule("/order-lines/delete", endpoint="OrderLines_delete", view_func=views.OrderLinesTable().delete_row, methods=["GET", "POST"])
+    app.add_url_rule("/order-lines/update", endpoint="OrderLines_update", view_func=views.OrderLinesTable().update_row, methods=["GET", "POST"])
+    app.add_url_rule("/order-lines/search", endpoint="OrderLines_search", view_func=views.OrderLinesTable().search, methods=["GET", "POST"])
+
 
     app.config["dbname"] = "import_test.db"
  
