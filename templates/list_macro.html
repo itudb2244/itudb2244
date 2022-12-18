@@ -1,4 +1,4 @@
-{% macro list_all(table_object, title) %}
+{% macro list_all(table_object, title, context) %}
     <table class="table">
       <thead>
             <th scope="column">Update</th>
@@ -40,15 +40,27 @@
         
         {% for iter in table_object %}
         
-        
+         
         <tr>
-          <td>
-            <a style="color:white; text-decoration: none;" href="">
+            {% if iter[context.selectedIDColumn] == context.selectedID %}
+            <td>
+            <a style="color:white; text-decoration: none;" href="{{url_for(title + '_update_view', id=iter.__dict__.values())}}">
             <button class="update-btn">
-              update
+              Done
             </button>
-          </a>
+              </a>
           </td>
+
+            {%else %}
+
+              <td>
+            <a style="color:white; text-decoration: none;" href="{{url_for(title + '_update_view', id=iter.__dict__.values())}}">
+            <button class="update-btn">
+                update {{context.selectedID, iter[context.selectedIDColumn]}}
+            </button>
+              </a>
+          </td>
+            {% endif%}
           <td>
             <a style="color:white; text-decoration: none;" href="{{url_for(title + '_delete', id=iter.__dict__.values())}}">
             <button class="del-btn">

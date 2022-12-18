@@ -12,6 +12,8 @@ def create_app():
     app.add_url_rule("/customers", endpoint="Customers_page", view_func=views.CustomerTable().get_table, methods=["GET","POST"])
     app.add_url_rule("/customers/add-customer", endpoint="Customers_add", view_func=views.CustomerTable().add_row,  methods=["POST"])
     app.add_url_rule("/customers/delete-customer", endpoint="Customers_delete", view_func=views.CustomerTable().delete_row, methods=["GET", "POST"])
+    app.add_url_rule("/customers/update-customer-view", endpoint="Customers_update_view", view_func=views.CustomerTable().update_row_view, methods=["GET", "POST"])
+    app.add_url_rule("/customers/update-customer", endpoint="Customers_update", view_func=views.CustomerTable().update_row, methods=["GET", "POST"])
     # app.add_url_rule("/customer/<int:id>", endpoint="Customers_get", view_func=views.get_customer, methods=["GET", "POST"])
 
 

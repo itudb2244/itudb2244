@@ -3,16 +3,23 @@ import services.customer_service as customerService
 
 from services.service import *
 
+class Context():
+    def __init__(self):
+        self.isEdit = False 
+        self.selectedID = 0
+        self.selectedIDColumn = 0
+
 class Table():
     def __init__(self, type, service, data_class):
         self.type = type
         self.service = service
         self.data_class = data_class
+        #self.context = Context()
 
     def get_table(self):
         service = self.service()
         data = service.get_data()
-        return render_template("generic_list.html", title=self.type, table=data)
+        return render_template("generic_list.html", title=self.type, table=data, context=self.context)
 
     def add_row(self):
         row = []
@@ -29,6 +36,38 @@ class Table():
         service.add_row(obj)
 
         return redirect(url_for(self.type + "_page"))
+
+    def update_row_view(self):
+        idString = request.args.get("id")
+        idString.replace("'", "")
+        id = idString.split("[")[1].split(",")[0]
+        idString.replace("'", "")
+        idString.replace("\"", "")
+        id = int(id)
+        idColumn = self.data_class.getColumns()[0]
+        service = self.service()
+        data = service.get_data()
+        context = Context()
+        
+        context.isEdit = True
+        context.selectedID = id
+        context.selectedIDColumn = idColumn
+
+        print("ID: " + id)
+        print("ID Column: " + idColumn)
+        return render_template("generic_list.html", title=self.type, table=data, context=context)
+
+    def update_row(self):
+        idString = request.args.get("id")
+        idString.replace("'", "")
+        id = idString.split("[")[1].split(",")[0]
+        
+        idColumn = self.data_class.getColumns()[0]
+        service = self.service()
+        service.update_row(id, idColumn)
+
+        return redirect(url_for(self.type + "_page"))
+
 
     def delete_row(self):
         idString = request.args.get("id")
