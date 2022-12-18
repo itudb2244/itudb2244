@@ -98,6 +98,10 @@ class InvoicesTable(Table):
     def __init__(self):
         super().__init__("Invoices", InvoiceService, Invoices)
            
+class OrdersTable(Table):
+    def __init__(self):
+        super().__init__("Orders", OrderService, Orders)
+        
 
 def home_page():
     return render_template("home.html")        
