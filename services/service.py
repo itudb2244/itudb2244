@@ -9,6 +9,8 @@ class Service():
 
     def get_data(self):
         query = 'SELECT * FROM ' + self.table
+        print(query)
+        print(">#>£#>£#>#>#>")
         object_list = []
 
         try:
@@ -19,8 +21,9 @@ class Service():
                     new_object = self.object_type(row)
                     object_list.append(new_object)
                 return object_list
-        except:
-            return False
+        except Exception as e:
+            print(e)
+            return []
 
     def get_rows_by_column(self, id, column):
         query = 'SELECT * FROM '+self.table+' WHERE('+self.table+'.'+column+' = {})'.format(id)
@@ -131,9 +134,6 @@ class Service():
                 return object_list
         except:
             return []
-
-
-
 
 
 class CustomerService(Service):

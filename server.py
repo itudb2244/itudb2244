@@ -49,7 +49,7 @@ def create_app():
     app.add_url_rule("/people/add", endpoint="People_add", view_func=views.PeopleTable().add_row,  methods=["POST"])
     app.add_url_rule("/people/delete", endpoint="People_delete", view_func=views.PeopleTable().delete_row, methods=["GET", "POST"])
     app.add_url_rule("/people/update", endpoint="People_update", view_func=views.PeopleTable().update_row, methods=["GET", "POST"])
-    app.add_url_rule("/opeople/search", endpoint="People_search", view_func=views.PeopleTable().search, methods=["GET", "POST"])
+    app.add_url_rule("/people/search", endpoint="People_search", view_func=views.PeopleTable().search, methods=["GET", "POST"])
 
     app.config["dbname"] = "import_test.db"
  

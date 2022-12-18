@@ -169,15 +169,15 @@ class Invoices(object):
 
 
 class OrderLines(object):
-    def __init__(self, OrderLineID,OrderID,StockItemID,Description,Quantity,UnitPrice,PickedQuantity,PickingCompletedWhen):
-        self.OrderLineID =OrderLineID
-        self.OrderID =OrderID
-        self.StockItemID =StockItemID
-        self.Description =Description
-        self.Quantity =Quantity
-        self.UnitPrice =UnitPrice
-        self.PickedQuantity =PickedQuantity
-        self.PickingCompletedWhen =PickingCompletedWhen
+    def __init__(self, row):
+        self.OrderLineID = row[0]
+        self.OrderID = row[1]
+        self.StockItemID = row[2]
+        self.Description = row[3]
+        self.Quantity = row[4]
+        self.UnitPrice = row[5]
+        self.PickedQuantity = row[6]
+        self.PickingCompletedWhen = row[7]
 
     def toDict(self):
         orderlines = {
@@ -287,12 +287,12 @@ class People(object):
 
 
 class StockItems(object):
-    def __init(self, StockItemID,StockItemName,LeadTimeDays,UnitPrice,RecommendedRetailPrice):
-        self.StockItemID =StockItemID
-        self.StockItemName =StockItemName
-        self.LeadTimeDays =LeadTimeDays
-        self.UnitPrice =UnitPrice
-        self.RecommendedRetailPrice =RecommendedRetailPrice
+    def __init(self, row):
+        self.StockItemID = row[0]
+        self.StockItemName = row[1]
+        self.LeadTimeDays = row[2]
+        self.UnitPrice = row[3]
+        self.RecommendedRetailPrice = row[4]
 
     def toDict(self):
         stockitems = {
@@ -310,14 +310,20 @@ class StockItems(object):
     def getCopy(self):
         return copy.deepcopy(self)
 
+    def getNonKeyColumns():
+        return ["StockItemName", "LeadTimeDays", "UnitPrice", "RecommendedRetailPrice"] 
+
+    def getColumns():
+        return ["StockItemID", "StockItemName", "LeadTimeDays", "UnitPrice", "RecommendedRetailPrice"] 
+
 class StockItemTransactions(object):
-    def __init__(self, StockItemTransactionID,StockItemID,CustomerID,InvoiceID,TransactionOccurredWhen,Quantity):
-        self.StockItemTransactionID =StockItemTransactionID
-        self.StockItemID =StockItemID
-        self.CustomerID =CustomerID
-        self.InvoiceID =InvoiceID
-        self.TransactionOccurredWhen =TransactionOccurredWhen
-        self.Quantity =Quantity
+    def __init__(self, row):
+        self.StockItemTransactionID = row[0]
+        self.StockItemID = row[1]
+        self.CustomerID = row[2]
+        self.InvoiceID = row[3]
+        self.TransactionOccurredWhen = row[4]
+        self.Quantity = row[5]
 
     def toDict(self):
         stockitemtransactions = {
@@ -336,3 +342,8 @@ class StockItemTransactions(object):
     def getCopy(self):
         return copy.deepcopy(self)
 
+    def getNonKeyColumns():
+        return ["StockID", "CustomerID", "InvoiceID", "TransactionOccerredWhen", "Quantity"] 
+
+    def getColumns():
+        return ["StockItemTransactionID", "StockID", "CustomerID", "InvoiceID", "TransactionOccerredWhen", "Quantity"] 
