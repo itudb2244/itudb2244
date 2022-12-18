@@ -105,21 +105,21 @@ class InvoiceLines(object):
         return copy.deepcopy(self)
 
 class Invoices(object):
-    def __init__(self, InvoiceID,CustomerID,OrderID,ContactPersonID,AccountsPersonID,InvoiceDate,CustomerPurchaseOrderNumber,DeliveryInstructions,InternalComments,DeliveryRun,RunPosition,ReturnedDeliveryData,ConfirmedDeliveryTime,ConfirmedReceivedBy):
-        self.InvoiceID = InvoiceID
-        self.CustomerID = CustomerID
-        self.OrderID = OrderID
-        self.ContactPersonID = ContactPersonID
-        self.AccountsPersonID = AccountsPersonID
-        self.InvoiceDate = InvoiceDate
-        self.CustomerPurchaseOrderNumber = CustomerPurchaseOrderNumber
-        self.DeliveryInstructions = DeliveryInstructions
-        self.InternalComments = InternalComments
-        self.DeliveryRun =DeliveryRun
-        self.RunPosition=RunPosition
-        self.ReturnedDeliveryData=ReturnedDeliveryData
-        self.ConfirmedDeliveryTime=ConfirmedDeliveryTime
-        self.ConfirmedReceivedBy=ConfirmedReceivedBy
+    def __init__(self, row):
+        self.InvoiceID = row[0]
+        self.CustomerID = row[1]
+        self.OrderID = row[2]
+        self.ContactPersonID = row[3]
+        self.AccountsPersonID = row[4]
+        self.InvoiceDate = row[5]
+        self.CustomerPurchaseOrderNumber = row[6]
+        self.DeliveryInstructions = row[7]
+        self.InternalComments = row[8]
+        self.DeliveryRun =row[9]
+        self.RunPosition=row[10]
+        self.ReturnedDeliveryData=row[11]
+        self.ConfirmedDeliveryTime=row[12]
+        self.ConfirmedReceivedBy=row[13]
 
     def toDict(self):
         invoices = {
@@ -145,6 +145,14 @@ class Invoices(object):
 
     def getCopy(self):
         return copy.deepcopy(self)
+        
+    def getNonKeyColumns():
+        return ["CustomerID", "OrderID", "ContactPersonID", "AccountsPersonID", "InvoiceDate", "CustomerPurchaseOrderNumber","DeliveryInstructions","InternalComments", "DeliveryRun","RunPosition","ReturnedDeliveryData","ConfirmedDeliveryTime","ConfirmedReceivedBy"]
+
+    def getColumns():
+        return ["InvoiceID","CustomerID", "OrderID", "ContactPersonID", "AccountsPersonID", "InvoiceDate", "CustomerPurchaseOrderNumber","DeliveryInstructions","InternalComments", "DeliveryRun","RunPosition","ReturnedDeliveryData","ConfirmedDeliveryTime","ConfirmedReceivedBy"]
+
+
 
 class OrderLines(object):
     def __init__(self, OrderLineID,OrderID,StockItemID,Description,Quantity,UnitPrice,PickedQuantity,PickingCompletedWhen):
