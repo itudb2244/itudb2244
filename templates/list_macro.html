@@ -5,13 +5,25 @@
     <th scope="column"> </th>
 
     {% for keys in table_object[0].__dict__.keys() %}
-    <th scope="column">{{ keys }}</th>
+    <div>
+     
+    <th class="" scope="column""> 
+      {{ keys }}
+    <a   style="color:white; text-decoration: none; position: absolute;"
+      href="">
+      <img class=" mx-2" src="/static/sort.png" style="width:25px;height:25px;">
+    </a>
+    
+ 
+    </th>
+  
+    </div>
     {% endfor %}
 
 
   </thead>
 
-  <tbody class="table-item-horizontal" style="vertical-align: middle;" >
+  <tbody class="table-item-horizontal sortable" style="vertical-align: middle;" >
     <tr>
       <form method="POST" action="{{url_for(title + '_add')}}">
         <td style="vertical-align: middle;">
