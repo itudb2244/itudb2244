@@ -1,49 +1,41 @@
 {% extends "layout.html" %}
 {% block title %}HomePage{% endblock %}
 {% block content %}
-    <header>
-        <nav>
-            <u1>
-            <li><a href="{{ url_for('customers_page') }}">Customers Page </a></li>
-            </u1>
+<div class="container ">
+    <div class="row" style="margin-top: 110px; margin-bottom: 110px;">
+      <div class="col" style="margin-top: 75px;">
+        <p  style="color: #6868ab; font-size: 350%;"><strong>Team Members</strong> </p>
+        <div class="row ml-2">
+            <img class="mr-1" src="/static/user.png"  style="width:25px;height:25px;">
+            <p>Eymen Günay - 040190218</p>
+        </div>
+        <div class="row ml-2">
+            <img class="mr-1" src="/static/user.png"  style="width:25px;height:25px;">
+            <p>Esat Gündoğdu - 150190055</p>
+        </div>
+        <div class="row ml-2">
+            <img class="mr-1" src="/static/user.png"  style="width:25px;height:25px;">
+            <p>Feyza Özen - 150190014</p>
+        </div>
 
-            <u1>
-                <li><a href="{{ url_for('people_page') }}">People Page </a></li>
-            </u1>
+        <div class="row ml-2">
+            <img class="mr-1" src="/static/user.png"  style="width:25px;height:25px;">
+            <p>Malik Kalembaşı - 150180112</p>
+        </div>
+       
+        <div class="row ml-2">
+            <img class="mr-1" src="/static/user.png"  style="width:25px;height:25px;">
+            <p>Şule Beyza Karadağ - 150180024</p>
+        </div>
+       
+       
+    </div>
+      <div class="col">
+        <div class="center-block ">
+            <img src="/static/home-pic.png" alt="home picture" style="width:450px;height:450px;" class="picture">
+        </div>
+      </div>
+    </div>
+</div>
 
-            <u1>
-                <li><a href="{{ url_for('invoices_page') }}">Invoices Page </a></li>
-            </u1>
-
-            <u1>
-                <li><a href="{{ url_for('invoice_lines_page') }}">Invoices Lines Page </a></li>
-            </u1>
-
-            <u1>
-                <li><a href="{{ url_for('order_lines_page') }}">Order Lines Page </a></li>
-            </u1>
-
-            <u1>
-                <li><a href="{{ url_for('orders_page') }}">Orders Page </a></li>
-            </u1>
-
-            <u1>
-                <li><a href="{{ url_for('stockitems_page') }}">Stockitems Page </a></li>
-            </u1>
-
-            <u1>
-                <li><a href="{{ url_for('stockitem_holdings_page') }}">Stockitem Holdings Page </a></li>
-            </u1>
-
-            <u1>
-                <li><a href="{{ url_for('stockitem_transactions_page') }}">Stockitem Transactions Page </a></li>
-            </u1>
-
-
-            <u1>
-                <li><a href="{{ url_for('customer_transactions_page') }}">Customer Transactions Page </a></li>
-            </u1>
-
-        </nav>
-    </header>
 {% endblock %}
