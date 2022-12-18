@@ -41,9 +41,9 @@ class Table():
         idString = request.args.get("id")
         idString.replace("'", "")
         id = idString.split("[")[1].split(",")[0]
-        idString.replace("'", "")
-        idString.replace("\"", "")
-        id = int(id)
+        id.replace("'", "")
+        id.replace('"', "")
+        #id = int(id)
         idColumn = self.data_class.getColumns()[0]
         service = self.service()
         data = service.get_data()
