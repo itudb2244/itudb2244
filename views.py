@@ -55,7 +55,7 @@ class Table():
         
         if request.method == "GET":
             service = self.service()
-            data = service.get_data()
+            data = service.get_data(self.page)
             
             context = Context()
             try:
