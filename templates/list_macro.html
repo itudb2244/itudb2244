@@ -44,7 +44,7 @@
         <tr>
             {% if iter[context.selectedIDColumn] == context.selectedID %}
             <td>
-            <a style="color:white; text-decoration: none;" href="{{url_for(title + '_update_view', id=iter.__dict__.values())}}">
+            <a style="color:white; text-decoration: none;" href="{{url_for(title + '_update', id=iter.__dict__.values())}}">
             <button class="update-btn">
               Done
             </button>
