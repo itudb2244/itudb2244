@@ -199,7 +199,7 @@ class OrderLines(object):
         return copy.deepcopy(self)
 
     def getNonKeyColumns():
-        return ["Description", "UnitPrice", "Quantity", "PickedQuantity", "PickingCompletedWhen"]
+        return ["OrderID", "StockItemID", "Description", "UnitPrice", "Quantity", "PickedQuantity", "PickingCompletedWhen"]
 
     def getColumns():
         return ["OrderLineID", "OrderID", "StockItemID", "Description", "UnitPrice", "Quantity", "PickedQuantity", "PickingCompletedWhen"]
@@ -278,10 +278,10 @@ class People(object):
         return copy.deepcopy(self)
 
     def getNonKeyColumns():
-        return ["FullName", "LogonName", "HashedPassword", "IsSystemUser", "IsEmployee", "IsSalesPerson", "PhoneNumber", "EmailAddress"] 
+        return ["FullName", "LogonName", "HashedPassword", "IsSystemUser", "IsEmployee", "IsSalesperson", "PhoneNumber", "EmailAddress"] 
 
     def getColumns():
-        return ["PersonID", "FullName", "LogonName", "HashedPassword", "IsSystemUser", "IsEmployee", "IsSalesPerson", "PhoneNumber", "EmailAddress"] 
+        return ["PersonID", "FullName", "LogonName", "HashedPassword", "IsSystemUser", "IsEmployee", "IsSalesperson", "PhoneNumber", "EmailAddress"] 
 
 
 
