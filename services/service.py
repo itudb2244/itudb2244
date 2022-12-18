@@ -36,7 +36,6 @@ class Service():
                 return object_list
         except:
             return None
- 
 
     def add_row(self, obj):
         columns = self.object_type.getNonKeyColumns()
@@ -68,7 +67,6 @@ class Service():
         except:
             return False
 
-        
     def delete_row(self, id, idColumn):
         query = "DELETE FROM "+self.table+" WHERE("+idColumn+" = "+str(id)+")"
 
@@ -82,6 +80,9 @@ class Service():
                 return True
         except:
             return False
+
+    def update_row(self, id, idColumn):
+        pass
 
 class CustomerService(Service):
     def __init__(self):

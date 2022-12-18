@@ -5,7 +5,7 @@ from services.service import *
 
 class Context():
     def __init__(self):
-        self.isEdit = False 
+        self.isEdit = False
         self.selectedID = 0
         self.selectedIDColumn = 0
 
@@ -19,7 +19,7 @@ class Table():
     def get_table(self):
         service = self.service()
         data = service.get_data()
-        return render_template("generic_list.html", title=self.type, table=data, context=self.context)
+        return render_template("generic_list.html", title=self.type, table=data, context=Context())
 
     def add_row(self):
         row = []
@@ -39,11 +39,10 @@ class Table():
 
     def update_row_view(self):
         idString = request.args.get("id")
-        idString.replace("'", "")
+        idString = idString.replace("'", "")
         id = idString.split("[")[1].split(",")[0]
-        id.replace("'", "")
-        id.replace('"', "")
-        #id = int(id)
+
+        # id = int(id)
         idColumn = self.data_class.getColumns()[0]
         service = self.service()
         data = service.get_data()
@@ -53,24 +52,32 @@ class Table():
         context.selectedID = id
         context.selectedIDColumn = idColumn
 
-        print("ID: " + id)
-        print("ID Column: " + idColumn)
         return render_template("generic_list.html", title=self.type, table=data, context=context)
 
     def update_row(self):
-        idString = request.args.get("id")
-        idString.replace("'", "")
+        idString = request.args.get("update_id")
+        idString = idString.replace("'", "")
         id = idString.split("[")[1].split(",")[0]
-        
         idColumn = self.data_class.getColumns()[0]
-        service = self.service()
-        service.update_row(id, idColumn)
+        
+        if request.method == "GET":
+            service = self.service()
+            data = service.get_data()
+            
+            context = Context()
+            context.isEdit = True
+            context.selectedID = id
+            context.selectedIDColumn = idColumn
+            return render_template("generic_list.html", title=self.type, table=data, context=context)
+        else:
+            service = self.service()
+            service.update_row(id, idColumn)
+            return redirect(url_for(self.type + "_page"))
 
-        return redirect(url_for(self.type + "_page"))
 
 
     def delete_row(self):
-        idString = request.args.get("id")
+        idString = request.args.get("delete_id")
         idString.replace("'", "")
         id = idString.split("[")[1].split(",")[0]
 
@@ -90,30 +97,4 @@ class CustomerTable(Table):
         
 
 def home_page():
-    return render_template("home.html")
-
-
-def customers_page():
-    service = CustomerService()
-    customers = service.get_data()
-    return render_template("generic_list.html", title="Customers", table=customers)
-
-def get_customer(id):
-    service = CustomerService()
-    customer = service.get_rows_by_column(id, "CustomerID")
-    return render_template("generic_list.html", title="Get Customer", table=customer)
-
-def add_customers_page():
-    customerName = request.form["CustomerName"]
-    phoneNumber = request.form["PhoneNumber"]
-    websiteURL = request.form["WebsiteURL"]
-    deliveryAddressLine1 = request.form["DeliveryAddressLine1"]
-    deliveryAddressLine2 = request.form["DeliveryAddressLine2"]
-    customer = Customer((-1, customerName, -1, phoneNumber, websiteURL, deliveryAddressLine1, deliveryAddressLine2))
-
-    service = CustomerService()
-    service.add_row(customer)
-
-    customers = service.get_data()
-    return redirect(url_for("Customers_page"))
-        
+    return render_template("home.html")        
