@@ -1,8 +1,8 @@
 {% macro list_all(table_object, title, context) %}
 <table class="table">
   <thead>
-    <th scope="column">Update</th>
-    <th scope="column">Add/Delete</th>
+    <th scope="column"> </th>
+    <th scope="column"> </th>
 
     {% for keys in table_object[0].__dict__.keys() %}
     <th scope="column">{{ keys }}</th>
@@ -15,7 +15,9 @@
     <tr>
       <form method="POST" action="{{url_for(title + '_add')}}">
         <td style="vertical-align: middle;">
+            <button style="background-color: transparent;box-shadow: none;border: none; border-width : 0; border : 0;outline: none;">
           <img src="/static/plus.png" alt="add" style="width:25px;height:25px;">
+          </button>
         </td>
         {% for keys in table_object[0].__dict__.keys() %}
 
