@@ -11,13 +11,11 @@
 
   </thead>
 
-  <tbody>
+  <tbody class="table-item-horizontal" style="vertical-align: middle;" >
     <tr>
       <form method="POST" action="{{url_for(title + '_add')}}">
-        <td>
-          <button class="del-btn" style="background-color:rgb(36, 228, 74); margin-top: 16px;">
-            <a style="color:white; text-decoration: none;" href="">add</a>
-          </button>
+        <td style="vertical-align: middle;">
+          <img src="/static/plus.png" alt="add" style="width:25px;height:25px;">
         </td>
         {% for keys in table_object[0].__dict__.keys() %}
 
@@ -35,12 +33,10 @@
     {% for iter in table_object %}
 
     <tr>
-      <td>
+      <td style="vertical-align: middle;">
         <a style="color:white; text-decoration: none;"
           href="{{url_for(title + '_delete', delete_id=iter.__dict__.values())}}">
-          <button class="del-btn">
-            delete
-          </button>
+          <img src="/static/trash-can.png" alt="delete" style="width:25px;height:25px;">
         </a>
       </td>
       {% if iter[context.selectedIDColumn] == context.selectedID %}
@@ -55,12 +51,10 @@
 
       {%else %}
 
-      <td>
+      <td  style="vertical-align: middle;">
         <a style="color:white; text-decoration: none;"
           href="{{url_for(title + '_update', update_id=iter.__dict__.values())}}">
-          <button class="update-btn">
-            update {{context.selectedID, iter[context.selectedIDColumn]}}
-          </button>
+          <img src="/static/edit.png" alt="update" style="width:25px;height:25px;">
         </a>
       </td>
       {% endif%}
@@ -81,7 +75,7 @@
       {%else %}
 
       {% for key in iter.__dict__.keys() %}
-      <td>{{ iter[key] }}</td>
+      <td style="vertical-align: middle;">{{ iter[key] }}</td>
       {% endfor %}
       {% endif %}
     </tr>

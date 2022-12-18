@@ -248,5 +248,12 @@
           color: white;
         }
 
+        .table-item-horizontal{
+          text-align: center;
+        }
+        .table-item-vertical{
+          vertical-align: middle;
+        }
+
 
       
