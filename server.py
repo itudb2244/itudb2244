@@ -9,7 +9,7 @@ def create_app():
 
     #CustomerTable = views.CustomerTable()
     app.add_url_rule("/", view_func=views.home_page)
-    app.add_url_rule("/customers", endpoint="Customers_page", view_func=views.CustomerTable().get_table, methods=["GET","POST"])
+    app.add_url_rule("/customers/<int:page>", endpoint="Customers_page", view_func=views.CustomerTable().get_table, methods=["GET","POST"])
     app.add_url_rule("/customers/add", endpoint="Customers_add", view_func=views.CustomerTable().add_row,  methods=["POST"])
     app.add_url_rule("/customers/delete", endpoint="Customers_delete", view_func=views.CustomerTable().delete_row, methods=["GET", "POST"])
     app.add_url_rule("/customers/update", endpoint="Customers_update", view_func=views.CustomerTable().update_row, methods=["GET", "POST"])
@@ -27,11 +27,12 @@ def create_app():
     app.add_url_rule("/invoice-lines/update", endpoint="InvoiceLines_update", view_func=views.InvoiceLinesTable().update_row, methods=["GET", "POST"])
     app.add_url_rule("/invoice-lines/search", endpoint="InvoiceLines_search", view_func=views.InvoiceLinesTable().search, methods=["GET", "POST"])
 
-    app.add_url_rule("/orders", endpoint="Orders_page", view_func=views.OrdersTable().get_table, methods=["GET","POST"])
-    app.add_url_rule("/orders/add", endpoint="Orders_add", view_func=views.OrdersTable().add_row,  methods=["POST"])
-    app.add_url_rule("/orders/delete", endpoint="Orders_delete", view_func=views.OrdersTable().delete_row, methods=["GET", "POST"])
-    app.add_url_rule("/orders/update", endpoint="Orders_update", view_func=views.OrdersTable().update_row, methods=["GET", "POST"])
-    app.add_url_rule("/orders/search", endpoint="Orders_search", view_func=views.OrdersTable().search, methods=["GET", "POST"])
+    ordersView = views.OrdersTable()
+    app.add_url_rule("/orders/<int:page>", endpoint="Orders_page", view_func=ordersView.get_table, methods=["GET","POST"])
+    app.add_url_rule("/orders/add", endpoint="Orders_add", view_func=ordersView.add_row,  methods=["POST"])
+    app.add_url_rule("/orders/delete", endpoint="Orders_delete", view_func=ordersView.delete_row, methods=["GET", "POST"])
+    app.add_url_rule("/orders/update", endpoint="Orders_update", view_func=ordersView.update_row, methods=["GET", "POST"])
+    app.add_url_rule("/orders/search", endpoint="Orders_search", view_func=ordersView.search, methods=["GET", "POST"])
 
     app.add_url_rule("/customer-transactions", endpoint="CustomerTransactions_page", view_func=views.CustomerTransactionsTable().get_table, methods=["GET","POST"])
     app.add_url_rule("/customer-transactions/add", endpoint="CustomerTransactions_add", view_func=views.CustomerTransactionsTable().add_row,  methods=["POST"])

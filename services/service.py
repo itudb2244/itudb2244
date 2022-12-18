@@ -7,15 +7,26 @@ class Service():
         self.table = table
         self.object_type = object_type
 
-    def get_data(self):
-        query = 'SELECT * FROM ' + self.table
-        print(query)
-        print(">#>£#>£#>#>#>")
-        object_list = []
+    def get_data(self, page):
+        max_row = 1000
+        row_num_query = 'SELECT COUNT("' + self.object_type.getColumns()[0] + '") FROM ' + self.table
 
+        object_list = []
         try:
             with sqlite3.connect(current_app.config["dbname"]) as connection:
                 cursor = connection.cursor()
+
+                num = 1
+                
+                row_num = cursor.execute(row_num_query)
+                for i in row_num:
+                    num = i[0]
+                
+                if page > num // max_row:
+                    page = num // max_row + 1
+
+                query = 'SELECT * FROM ' + self.table + " LIMIT " + str(max_row) + " OFFSET " + str((page-1)*max_row)
+
                 res = cursor.execute(query)
                 for row in res:
                     new_object = self.object_type(row)

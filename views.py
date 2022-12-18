@@ -14,11 +14,14 @@ class Table():
         self.type = type
         self.service = service
         self.data_class = data_class
-        #self.context = Context()
+        self.page = 1
 
-    def get_table(self):
+    def get_table(self, page):
         service = self.service()
-        data = service.get_data()
+        data = service.get_data(page)
+
+        self.page = page
+
         return render_template("generic_list.html", title=self.type, table=data, context=Context())
 
     def add_row(self):
@@ -35,7 +38,7 @@ class Table():
         service = self.service()
         service.add_row(obj)
 
-        return redirect(url_for(self.type + "_page"))
+        return redirect(url_for(self.type + "_page", page=self.page))
 
     def update_row(self):
         idString = request.args.get("update_id")
@@ -68,7 +71,7 @@ class Table():
 
             service = self.service()
             service.update_row(obj, id, idColumn)
-            return redirect(url_for(self.type + "_page"))
+            return redirect(url_for(self.type + "_page", page=self.page))
 
     def delete_row(self):
         idString = request.args.get("delete_id")
@@ -80,7 +83,7 @@ class Table():
         service = self.service()
         service.delete_row(id, idColumn)
 
-        return redirect(url_for(self.type + "_page"))
+        return redirect(url_for(self.type + "_page", page=self.page))
 
     def search(self):
         if request.method == "POST":

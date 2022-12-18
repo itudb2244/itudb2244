@@ -20,9 +20,9 @@
           <nav class="nav">
             <ul class="nav__wrapper mt-3">
               <li class="nav__item"><a href="{{url_for('People_page')}}">People </a></li>
-              <li class="nav__item"><a href="{{url_for('Customers_page')}}">Customers </a></li> 
+              <li class="nav__item"><a href="{{url_for('Customers_page', page=1)}}">Customers </a></li> 
               <li class="nav__item"><a href="{{url_for('CustomerTransactions_page')}}">Customer Transactions </a></li> 
-              <li class="nav__item"><a href="{{url_for('Orders_page')}}">Orders </a></li>
+              <li class="nav__item"><a href="{{url_for('Orders_page', page=1)}}">Orders </a></li>
               <li class="nav__item"><a href="#">Order Lines </a></li>
               <li class="nav__item"><a href="{{url_for('Invoices_page')}}">Invoices </a></li>
               <li class="nav__item"><a href="{{url_for('InvoiceLines_page')}}">Invoices Lines </a></li>
