@@ -79,8 +79,8 @@ class Service():
         except:
             return False
 
-    def update_row(self, data, id , idColumn):
-        column_datas = data.toDict().values()
+    def update_row(self, data, id , idColumn):  
+        dict_data = data.toDict()
 
         # "UPDATE Customers SET CustomerName=Eymen, WebsiteURL=eymen.com"
         query = "UPDATE "+self.table+" SET "
@@ -88,18 +88,15 @@ class Service():
         columns = self.object_type.getColumns()
         for i,column in enumerate(columns):
             if column in self.object_type.getNonKeyColumns():
-                query += column + "=" + column_datas[i]
+                query += column + '="' + dict_data[column] + '"'
                 if i != len(columns)-1:
                     query += ", "
-        query += " WHERE (" + idColumn + " = " + str(id)
-
-        print(query)
+        query += " WHERE (" + idColumn + " = " + str(id) + ")"
 
         try:
             with sqlite3.connect(current_app.config["dbname"]) as connection:
                 cursor = connection.cursor()
                 cursor.execute(query)
-
                 return True
         except:
             return False
