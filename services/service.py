@@ -79,7 +79,7 @@ class Service():
         except:
             return False
 
-    def update_row(self, data, id , idColumn):  
+    def update_row(self, data, id , idColumn): 
         dict_data = data.toDict()
 
         # "UPDATE Customers SET CustomerName=Eymen, WebsiteURL=eymen.com"
@@ -100,6 +100,39 @@ class Service():
                 return True
         except:
             return False
+
+    def search_and_list(self, dictionary):
+        query = "SELECT * FROM " + self.table + " WHERE(("
+
+        # SELECT * FROM Customers WHERE(id=5 AND (CustomerName LIKE "%esat%") AND id2=5)
+
+        for i, key in enumerate(dictionary):
+            if dictionary[key].isnumeric():
+                print(dictionary[key])
+                query += key + "=" + dictionary[key]
+            else:
+                query += key + " LIKE " + '"%' + dictionary[key] + '%"'
+            if i != len(dictionary)-1:
+                query += ") AND ("
+
+        query += "))"
+
+        print(query)
+
+        object_list = []
+
+        try:
+            with sqlite3.connect(current_app.config["dbname"]) as connection:
+                cursor = connection.cursor()
+                res = cursor.execute(query)
+                for row in res:
+                    new_object = self.object_type(row)
+                    object_list.append(new_object)
+                return object_list
+        except:
+            return []
+
+
 
 
 
