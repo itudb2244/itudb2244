@@ -6,8 +6,34 @@
     <title>Project - {% block title %}{% endblock %}</title>  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    <link rel="stylesheet" href="styles/reset.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/header.css') }}" />
   </head>
   <body>
+    <header class="site-header">
+      <div class="wrapper site-header__wrapper">
+        <div class="site-header__start">
+          <a href="{{ url_for('home_page') }}"><img src="/static/home.png" alt="home page" style="width:30px;height:30px;" class="brand"></a>
+          
+        </div>
+        <div class="site-header__end">
+          <nav class="nav">
+            <button class="nav__toggle" aria-expanded="false" type="button">
+              menu
+            </button>
+            <ul class="nav__wrapper mt-3">
+              <li class="nav__item"><a href="{{ url_for('people_page') }}">People </a></li>
+              <li class="nav__item"><a href="{{ url_for('customers_page') }}">Customers </a></li> 
+              <li class="nav__item"><a href="{{ url_for('customer_transactions_page') }}">Customer Transactions </a></li> 
+              <li class="nav__item"><a href="{{ url_for('orders_page') }}">Orders </a></li>
+              <li class="nav__item"><a href="{{ url_for('order_lines_page') }}">Order Lines </a></li>
+              <li class="nav__item"><a href="{{ url_for('invoices_page') }}">Invoices </a></li>
+              <li class="nav__item"><a href="{{ url_for('invoice_lines_page') }}">Invoices Lines </a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
     {% block content %}
     {% endblock %}   
     <footer>
