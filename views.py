@@ -67,8 +67,6 @@ class Table():
             service.update_row(obj, id, idColumn)
             return redirect(url_for(self.type + "_page"))
 
-
-
     def delete_row(self):
         idString = request.args.get("delete_id")
         idString.replace("'", "")
@@ -80,6 +78,14 @@ class Table():
         service.delete_row(id, idColumn)
 
         return redirect(url_for(self.type + "_page"))
+
+    def search(self):
+        if request.method == "POST":
+            
+            service = self.service()
+            search_data = service.search_and_list(request.form)
+
+            return render_template("generic_list.html", title=self.type, table=search_data, context=Context())
 
         
 
