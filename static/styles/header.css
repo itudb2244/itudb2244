@@ -1,7 +1,7 @@
     .site-header {
     position: relative;
     background-color: #6868ab;
-    width: 1670px;}
+    width: 100%;}
   
   .site-header__end {
     display: flex;
