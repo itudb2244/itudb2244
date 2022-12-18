@@ -93,15 +93,17 @@ class CustomerTable(Table):
     def __init__(self):
         super().__init__("Customers", CustomerService, Customer)
 
-
 class InvoicesTable(Table):
     def __init__(self):
         super().__init__("Invoices", InvoiceService, Invoices)
+
+class InvoiceLinesTable(Table):
+    def __init__(self):
+        super().__init__("InvoiceLines", InvoiceLineService, InvoiceLines)
            
 class OrdersTable(Table):
     def __init__(self):
         super().__init__("Orders", OrderService, Orders)
-
 
 class CustomerTransactionsTable(Table):
     def __init__(self):

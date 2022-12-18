@@ -82,15 +82,15 @@ class CustomerTransactions(object):
 
 
 class InvoiceLines(object):
-    def __init__(self,InvoiceLineID,InvoiceID,StockItemID,Description,Quantity,UnitPrice,LineProfit,ExtendedPrice):
-        self.InvoiceLineID =InvoiceLineID
-        self.InvoiceID =InvoiceID
-        self.StockItemID =StockItemID
-        self.Description =Description
-        self.Quantity =Quantity
-        self.UnitPrice =UnitPrice
-        self.LineProfit =LineProfit
-        self.ExtendedPrice =ExtendedPrice
+    def __init__(self, row):
+        self.InvoiceLineID = row[0]
+        self.InvoiceID = row[1]
+        self.StockItemID = row[2]
+        self.Description = row[3]
+        self.Quantity = row[4]
+        self.UnitPrice = row[5]
+        self.LineProfit = row[6]
+        self.ExtendedPrice = row[7]
 
     def toDict(self):
         invoicelines = {
@@ -110,6 +110,13 @@ class InvoiceLines(object):
 
     def getCopy(self):
         return copy.deepcopy(self)
+
+    def getNonKeyColumns():
+        return ["InvoiceID", "StockItemID", "Description", "Quantity", "UnitPrice","LineProfit","ExtendedPrice"]
+
+    def getColumns():
+        return ["InvoiceLineID","InvoiceID", "StockItemID", "Description", "Quantity", "UnitPrice", "LineProfit","ExtendedPrice"]
+
 
 class Invoices(object):
     def __init__(self, row):

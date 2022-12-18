@@ -15,13 +15,17 @@ def create_app():
     app.add_url_rule("/customers/update", endpoint="Customers_update", view_func=views.CustomerTable().update_row, methods=["GET", "POST"])
     app.add_url_rule("/customers/search", endpoint="Customers_search", view_func=views.CustomerTable().search, methods=["GET", "POST"])
    
-    # app.add_url_rule("/customer/<int:id>", endpoint="Customers_get", view_func=views.get_customer, methods=["GET", "POST"])
     app.add_url_rule("/invoices", endpoint="Invoices_page", view_func=views.InvoicesTable().get_table, methods=["GET","POST"])
     app.add_url_rule("/invoices/add", endpoint="Invoices_add", view_func=views.InvoicesTable().add_row,  methods=["POST"])
     app.add_url_rule("/invoices/delete", endpoint="Invoices_delete", view_func=views.InvoicesTable().delete_row, methods=["GET", "POST"])
     app.add_url_rule("/invoices/update", endpoint="Invoices_update", view_func=views.InvoicesTable().update_row, methods=["GET", "POST"])
     app.add_url_rule("/invoices/search", endpoint="Invoices_search", view_func=views.InvoicesTable().search, methods=["GET", "POST"])
-  
+
+    app.add_url_rule("/invoice-lines", endpoint="InvoiceLines_page", view_func=views.InvoiceLinesTable().get_table, methods=["GET","POST"])
+    app.add_url_rule("/invoice-lines/add", endpoint="InvoiceLines_add", view_func=views.InvoiceLinesTable().add_row,  methods=["POST"])
+    app.add_url_rule("/invoice-lines/delete", endpoint="InvoiceLines_delete", view_func=views.InvoiceLinesTable().delete_row, methods=["GET", "POST"])
+    app.add_url_rule("/invoice-lines/update", endpoint="InvoiceLines_update", view_func=views.InvoiceLinesTable().update_row, methods=["GET", "POST"])
+    app.add_url_rule("/invoice-lines/search", endpoint="InvoiceLines_search", view_func=views.InvoiceLinesTable().search, methods=["GET", "POST"])
 
     app.add_url_rule("/orders", endpoint="Orders_page", view_func=views.OrdersTable().get_table, methods=["GET","POST"])
     app.add_url_rule("/orders/add", endpoint="Orders_add", view_func=views.OrdersTable().add_row,  methods=["POST"])
