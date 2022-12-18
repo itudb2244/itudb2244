@@ -67,8 +67,6 @@ class Table():
             service.update_row(obj, id, idColumn)
             return redirect(url_for(self.type + "_page"))
 
-
-
     def delete_row(self):
         idString = request.args.get("delete_id")
         idString.replace("'", "")
@@ -81,20 +79,12 @@ class Table():
 
         return redirect(url_for(self.type + "_page"))
 
-    def search_row(self):
-        row = []
-        columns = self.data_class.getColumns()
-        for column in columns:
-            if column in self.data_class.getNonKeyColumns():
-                row.append(request.form[column])
-            else:
-                row.append(None)
-        print(row)
-        obj = self.data_class(row)
-        service = self.service()
-        service.search_row(obj)
-        return redirect(url_for(self.type + "_page"))
-
+    def search(self):
+        if request.method == "POST":
+            
+            service = self.service()
+            search_data = service.search_and_list(request.form)
+            return render_template("generic_list.html", title=self.type, table=search_data, context=Context())
 
         
 
