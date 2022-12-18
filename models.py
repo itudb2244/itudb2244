@@ -177,14 +177,18 @@ class OrderLines(object):
         return copy.deepcopy(self)
 
 class Orders(object):
-    def __init__(self, OrderID,CustomerID,OrderDate,ExpectedDeliveryDate,CustomerPurchaseOrderNumber,IsUndersupplyBackordered,PickingCompletedWhen):
-        self.OrderID =OrderID
-        self.CustomerID =CustomerID
-        self.OrderDate =OrderDate
-        self.ExpectedDeliveryDate =ExpectedDeliveryDate
-        self.CustomerPurchaseOrderNumber =CustomerPurchaseOrderNumber
-        self.IsUndersupplyBackordered =IsUndersupplyBackordered
-        self.PickingCompletedWhen =PickingCompletedWhen
+    def __init__(self, row):
+        self.OrderID = row[0]
+        self.CustomerID = row[1]
+        self.OrderDate = row[2]
+        self.ExpectedDeliveryDate = row[3]
+        self.CustomerPurchaseOrderNumber = row[4]
+        self.IsUndersupplyBackordered = row[5]
+        self.PickingCompletedWhen = row[6]
+    
+    def setID(self, id=None):
+        self.id = id
+        return self.id
 
     def toDict(self):
         orders = {
@@ -203,6 +207,13 @@ class Orders(object):
 
     def getCopy(self):
         return copy.deepcopy(self)
+
+    def getNonKeyColumns():
+        return ["CustomerID", "OrderDate", "ExpectedDeliveryDate", "CustomerPurchaseOrderNumber", "IsUndersupplyBackordered", "PickingCompletedWhen"]
+
+    def getColumns():
+        return ["OrderID", "CustomerID", "OrderDate", "ExpectedDeliveryDate", "CustomerPurchaseOrderNumber", "IsUndersupplyBackordered", "PickingCompletedWhen"]
+
 
 class People(object):
     def __init__(self, row):
@@ -236,33 +247,6 @@ class People(object):
     def getCopy(self):
         return copy.deepcopy(self)
 
-class StockItemHoldings(object):
-    def __init__(self, StockItemID,QuantityOnHand,BinLocation,LastStocktakeQuantity,LastCostPrice,ReorderLevel,TargetStockLevel):
-        self.StockItemID =StockItemID
-        self.QuantityOnHand =QuantityOnHand
-        self.BinLocation =BinLocation
-        self.LastStocktakeQuantity =LastStocktakeQuantity
-        self.LastCostPrice =LastCostPrice
-        self.ReorderLevel =ReorderLevel
-        self.TargetStockLevel =TargetStockLevel
-
-    def toDict(self):
-        stockitemholdings = {
-            'StockItemID': self.StockItemID,
-            'QuantityOnHand': self.QuantityOnHand,
-            'BinLocation': self.BinLocation,
-            'LastStocktakeQuantity': self.LastStocktakeQuantity,
-            'LastCostPrice': self.LastCostPrice,
-            'ReorderLevel': self.ReorderLevel,
-            'TargetStockLevel': self.TargetStockLevel,
-        }
-        return stockitemholdings
-
-    def get(self):
-        return self.toDict()
-
-    def getCopy(self):
-        return copy.deepcopy(self)
 
 class StockItems(object):
     def __init(self, StockItemID,StockItemName,LeadTimeDays,UnitPrice,RecommendedRetailPrice):
