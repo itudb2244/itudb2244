@@ -1,24 +1,63 @@
 {% macro list_all(table_object, title) %}
     <table class="table">
       <thead>
+
+            <th scope="column">Add/Delete</th>
+
           {% for keys in table_object[0].__dict__.keys() %}
             <th scope="column">{{ keys }}</th>
           {% endfor %}
+
+
       </thead>
       
       <tbody>
+        <tr>
+          <form method="POST" action="{{url_for(title + '_add')}}">
+            <td>
+              <button class="del-btn" style="background-color:rgb(36, 228, 74); margin-top: 16px;">
+                <a style="color:white; text-decoration: none;" href="">add</a>
+              </button>
+            </td>
+            {% for keys in table_object[0].__dict__.keys() %}
+            
+            <th scope="column">
+              <div class="formbold-input-group">
+                <label for="{{ keys }}" class="formbold-form-label" ></label>
+                <input
+                  type="text"
+                  name='{{ keys }}'
+                  id='{{ keys }}'
+                  placeholder='{{ keys }}'
+                  class="formbold-form-input"
+                  style="font-size:12px"
+                />
+              </div>
+            </th>
+            {% endfor %}
+          </form>
+        </tr>
         
-        {% for table_object in table_object %}
+        {% for iter in table_object %}
+        
         
         <tr>
-        {% for key in table_object.__dict__.keys() %}
-            {% if key == table_object.__dict__.keys()[0] %}
+          <td>
+            <a style="color:white; text-decoration: none;" href="{{url_for(title + '_delete', id=iter.__dict__.values())}}">
+            <button class="del-btn">
+              delete
+            </button>
+          </a>
+          </td>
+        {% for key in iter.__dict__.keys() %}
+            {% if key == iter.__dict__.keys()[0] %}
             
-                <th scope="row">{{ table_object[key] }}</th>
+                <th scope="row">{{ iter[key] }}</th>
             {% else %}
-              <td>{{ table_object[key] }}</td>
+              <td>{{ iter[key] }}</td>
             {% endif %}
         {% endfor %}
+
         </tr>
         {% endfor %}
       </tbody>

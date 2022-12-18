@@ -1,38 +1,87 @@
-from flask import current_app
+from flask import current_app, redirect, url_for, request
 import sqlite3
 from models import *
 
 class Service():
-    def __init__(self, type, object_type):
-        self.type = type
+    def __init__(self, table, object_type):
+        self.table = table
         self.object_type = object_type
 
     def get_data(self):
-        query = 'SELECT * FROM ' + self.type
+        query = 'SELECT * FROM ' + self.table
         object_list = []
 
-        with sqlite3.connect(current_app.config["dbname"]) as connection:
-            cursor = connection.cursor()
-            res = cursor.execute(query)
-            for row in res:
-                new_object = self.object_type(row)
-                object_list.append(new_object)
-
-        return object_list
+        try:
+            with sqlite3.connect(current_app.config["dbname"]) as connection:
+                cursor = connection.cursor()
+                res = cursor.execute(query)
+                for row in res:
+                    new_object = self.object_type(row)
+                    object_list.append(new_object)
+                return object_list
+        except:
+            return False
 
     def get_rows_by_column(self, id, column):
-        query = 'SELECT * FROM '+self.type+' WHERE('+self.type+'.'+column+' = {})'.format(id)
+        query = 'SELECT * FROM '+self.table+' WHERE('+self.table+'.'+column+' = {})'.format(id)
         object_list = []
         
-        with sqlite3.connect(current_app.config["dbname"]) as connection:
-            cursor = connection.cursor()
-            res = cursor.execute(query)
-            for row in res:
-                new_object = self.object_type(row)
-                object_list.append(new_object)
+        try:
+            with sqlite3.connect(current_app.config["dbname"]) as connection:
+                cursor = connection.cursor()
+                res = cursor.execute(query)
+                for row in res:
+                    new_object = self.object_type(row)
+                    object_list.append(new_object)
+                return object_list
+        except:
+            return None
+ 
 
-        return object_list
+    def add_row(self, obj):
+        columns = self.object_type.getNonKeyColumns()
+
+        query = 'INSERT INTO '+self.table+'('
+        for i,column in enumerate(columns):
+            query += column
+            if i != len(columns) - 1:
+                query += ', '
+
+        query += ') VALUES('
+
+        dictionary = obj.toDict()
+        keys = dictionary.keys()
+
+        for i,key in enumerate(keys):
+            if key in columns:
+                query += '"' + dictionary[key] + '"'
+                if i != len(keys) - 1:
+                    query += ', '
         
+        query += ')'
+
+        try:
+            with sqlite3.connect(current_app.config["dbname"]) as connection:
+                cursor = connection.cursor()
+                cursor.execute(query)
+                return True
+        except:
+            return False
+
+        
+    def delete_row(self, id, idColumn):
+        query = "DELETE FROM "+self.table+" WHERE("+idColumn+" = "+str(id)+")"
+
+        print(query)
+
+        try:
+            with sqlite3.connect(current_app.config["dbname"]) as connection:
+                cursor = connection.cursor()
+                cursor.execute(query)
+                
+                return True
+        except:
+            return False
 
 class CustomerService(Service):
     def __init__(self):
@@ -61,16 +110,3 @@ class OrderService(Service):
 class PeopleService(Service):
     def __init__(self):
         Service.__init__(self, "People", People)
-
-class StockItemHoldingService(Service):
-    def __init__(self):
-        Service.__init__(self, "StockItemHoldings", StockItemHoldings)
-
-class StockItemService(Service):
-    def __init__(self):
-        Service.__init__(self, "StockItems", StockItems)
-
-class StockItemTransactionService(Service):
-    def __init__(self):
-        Service.__init__(self, "StockItemTransactions", StockItemTransactions)
-
