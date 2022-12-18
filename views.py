@@ -92,6 +92,10 @@ class Table():
 class CustomerTable(Table):
     def __init__(self):
         super().__init__("Customers", CustomerService, Customer)
+
+class OrdersTable(Table):
+    def __init__(self):
+        super().__init__("Orders", OrderService, Orders)
         
 
 def home_page():
