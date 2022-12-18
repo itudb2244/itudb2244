@@ -1,8 +1,16 @@
+
+
 {% macro list_all(table_object, title) %}
+<div class="btn-group btn-group-toggle m-5"  style="padding: 10px, 10px;" data-toggle="buttons">
+  <label class="btn btn-info btn-m">
+    <a type="radio" name="options" id="Find Customer" autocomplete="off" href="{{ url_for('add_customers_page') }}" style="color: white">Find</a>
+  </label>
+</div>
+
     <table class="table">
       <thead>
 
-            <th scope="column">Add/Delete</th>
+            <th scope="column">Add/Delete/Edit</th>
 
           {% for keys in table_object[0].__dict__.keys() %}
             <th scope="column">{{ keys }}</th>
@@ -14,12 +22,12 @@
       <tbody>
         <tr>
           <td>
-            <button class="del-btn" style="background-color:rgb(36, 228, 74); margin-top: 16px;">
+            <button class="add-btn" style="background-color:rgb(36, 228, 74); margin-top: 16px;">
               <a style="color:white; text-decoration: none;" href="">add</a>
             </button>
           </td>
           {% for keys in table_object[0].__dict__.keys() %}
-          
+          <form>
           <th scope="column">
             <div class="formbold-input-group">
               <label for="{{ keys }}" class="formbold-form-label" ></label>
@@ -33,13 +41,17 @@
               />
             </div>
           </th>
-        {% endfor %}
+          {% endfor %}
+          </form>
         </tr>
         
         {% for table_object in table_object %}
         
         <tr>
           <td>
+            <button class="del-btn" style="background-color:rgb(255, 148, 27)">
+              <a style="color:white; text-decoration: none;" href="">edit</a>
+            </button>
             <button class="del-btn">
               <a style="color:white; text-decoration: none;" href="">delete</a>
             </button>

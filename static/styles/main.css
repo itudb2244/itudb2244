@@ -151,10 +151,10 @@
 
         .del-btn {
           text-align: center;
-          width: 100%;
-          font-size: 12px;
+          width: 47%;
+          font-size: 8px;
           border-radius: 5px;
-          padding: 6px 14px;
+          padding: 6px;
           border: none;
           font-weight: 500;
           background-color: #e93bba;
@@ -166,6 +166,26 @@
         }
 
         .del-btn:visited {
+          color: white;
+        }
+
+        .add-btn {
+          text-align: center;
+          width: 100%;
+          font-size: 12px;
+          border-radius: 5px;
+          padding: 6px 14px;
+          border: none;
+          font-weight: 500;
+          background-color: #e93bba;
+          color: white;
+          cursor: pointer;
+        }
+        .add-btn:hover {
+          box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .add-btn:visited {
           color: white;
         }
 
