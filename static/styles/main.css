@@ -255,6 +255,9 @@
         .table-item-vertical{
           vertical-align: middle;
         }
+        .btn-img-novisual{
+background-color: transparent;box-shadow: none;border: none; border-width : 0; border : 0;outline: none;
+        }
 
 
       
