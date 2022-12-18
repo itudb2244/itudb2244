@@ -199,7 +199,7 @@ class OrderLines(object):
         return copy.deepcopy(self)
 
     def getNonKeyColumns():
-        return ["Description", "UnitPrice", "Quantity", "PickedQuantity", "PickingCompletedWhen"]
+        return ["OrderID", "StockItemID", "Description", "UnitPrice", "Quantity", "PickedQuantity", "PickingCompletedWhen"]
 
     def getColumns():
         return ["OrderLineID", "OrderID", "StockItemID", "Description", "UnitPrice", "Quantity", "PickedQuantity", "PickingCompletedWhen"]
