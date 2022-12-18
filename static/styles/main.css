@@ -235,9 +235,10 @@
           padding: 6px 14px;
           border: none;
           font-weight: 500;
-          background-color: #ffad33;
+          background-color: #6868ab;
           color: white;
           cursor: pointer;
+          margin-top: 18px;
         }
 
         .del-btn:hover {
