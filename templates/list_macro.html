@@ -1,7 +1,7 @@
 {% macro list_all(table_object, title) %}
     <table class="table">
       <thead>
-
+            <th scope="column">Update</th>
             <th scope="column">Add/Delete</th>
 
           {% for keys in table_object[0].__dict__.keys() %}
@@ -42,6 +42,13 @@
         
         
         <tr>
+          <td>
+            <a style="color:white; text-decoration: none;" href="">
+            <button class="update-btn">
+              update
+            </button>
+          </a>
+          </td>
           <td>
             <a style="color:white; text-decoration: none;" href="{{url_for(title + '_delete', id=iter.__dict__.values())}}">
             <button class="del-btn">
