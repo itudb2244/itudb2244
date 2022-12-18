@@ -41,17 +41,17 @@ class Customer(object):
 
     
 class CustomerTransactions(object):
-    def __init__(self,CustomerTransactionID,CustomerID,InvoiceID,TransactionDate,AmountExcludingTax,TaxAmount,TransactionAmount,OutstandingBalance,FinalizationDate,IsFinalized):
-        self.CustomerTransactionID =CustomerTransactionID
-        self.CustomerID =CustomerID
-        self.InvoiceID =InvoiceID
-        self.TransactionDate =TransactionDate
-        self.AmountExcludingTax =AmountExcludingTax
-        self.TaxAmount =TaxAmount
-        self.TransactionAmount =TransactionAmount
-        self.OutstandingBalance =OutstandingBalance
-        self.FinalizationDate =FinalizationDate
-        self.IsFinalize =IsFinalized
+    def __init__(self,row):
+        self.CustomerTransactionID = row[0]
+        self.CustomerID =row[1]
+        self.InvoiceID =row[2]
+        self.TransactionDate =row[3]
+        self.AmountExcludingTax =row[4]
+        self.TaxAmount =row[5]
+        self.TransactionAmount =row[6]
+        self.OutstandingBalance =row[7]
+        self.FinalizationDate =row[8]
+        self.IsFinalize =row[9]
 
     def toDict(self):
         customertransactions = {
@@ -73,6 +73,13 @@ class CustomerTransactions(object):
 
     def getCopy(self):
         return copy.deepcopy(self)
+
+    def getNonKeyColumns():
+        return ["CustomerID", "InvoiceID", "TransactionDate", "AmountExcludingTax", "TaxAmount", "TransactionAmount","OutstandingBalance","FinalizationDate","IsFinalize"]
+
+    def getColumns():
+        return ["CustomerTransactionID","CustomerID", "InvoiceID", "TransactionDate", "AmountExcludingTax", "TaxAmount", "TransactionAmount","OutstandingBalance","FinalizationDate","IsFinalize"]
+
 
 class InvoiceLines(object):
     def __init__(self,InvoiceLineID,InvoiceID,StockItemID,Description,Quantity,UnitPrice,LineProfit,ExtendedPrice):
