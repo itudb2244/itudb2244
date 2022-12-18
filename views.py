@@ -113,5 +113,9 @@ class OrderLinesTable(Table):
     def __init__(self):
         super().__init__("OrderLines", OrderLineService, OrderLines)
 
+class PeopleTable(Table):
+    def __init__(self):
+        super().__init__("People", PeopleService, People)
+
 def home_page():
     return render_template("home.html")        

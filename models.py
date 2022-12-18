@@ -277,6 +277,14 @@ class People(object):
     def getCopy(self):
         return copy.deepcopy(self)
 
+    def getNonKeyColumns():
+        return ["FullName", "LogonName", "HashedPassword", "IsSystemUser", "IsEmployee", "IsSalesPerson", "PhoneNumber", "EmailAddress"] 
+
+    def getColumns():
+        return ["PersonID", "FullName", "LogonName", "HashedPassword", "IsSystemUser", "IsEmployee", "IsSalesPerson", "PhoneNumber", "EmailAddress"] 
+
+
+
 
 class StockItems(object):
     def __init(self, StockItemID,StockItemName,LeadTimeDays,UnitPrice,RecommendedRetailPrice):
