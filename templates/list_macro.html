@@ -4,14 +4,16 @@
     <th scope="column"> </th>
     <th scope="column"> </th>
 
-    <a style="color:white; text-decoration: none; display:inline-block; margin-bottom: 25px;;">
-      <button class="update-btn">
-        Previous
-      </button>
-      <button class="update-btn">
-        Next
-      </button>
-    </a>
+    <div style="margin-bottom:30px; margin-left: 15px; margin-top: 15px;">
+      <a style="color:white; text-decoration: none; position: relative;"
+        href="">
+        <img class=" mx-2" src="/static/previous.png" style="width:18px;height:18px;">
+      </a>
+      <a style="color:white; text-decoration: none; position: relative;"
+        href="">
+        <img class=" mx-2" src="/static/next.png" style="width:18px;height:18px;">
+      </a>
+    </div>
 
 
     {% for keys in table_object[0].__dict__.keys() %}
@@ -19,7 +21,7 @@
      
     <th class="" scope="column" > 
       {{ keys }}
-    <a   style="color:white; text-decoration: none; position: absolute;"
+    <a style="color:white; text-decoration: none; position: absolute;"
       href="">
       <img class=" mx-2" src="/static/sort.png" style="width:18px;height:18px;">
     </a>
