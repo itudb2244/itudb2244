@@ -23,7 +23,9 @@ class Table():
         if page <= 0:
             return redirect(url_for(self.type+"_page", page=1))
 
-        data = service.get_data(page)
+        sort_by = request.args.get("sortby")
+
+        data = service.get_data(page, sort_by)
 
         self.page = page
         context = Context()

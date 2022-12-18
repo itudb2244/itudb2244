@@ -22,7 +22,7 @@
     <th class="" scope="column" > 
       {{ keys }}
     <a style="color:white; text-decoration: none; position: absolute;"
-      href="">
+      href="{{url_for(title+'_page', page=context.page, sortby=keys)}}">
       <img class=" mx-2" src="/static/sort.png" style="width:18px;height:18px;">
     </a>
     

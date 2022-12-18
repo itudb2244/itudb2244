@@ -51,7 +51,7 @@ class CustomerTransactions(object):
         self.TransactionAmount =row[6]
         self.OutstandingBalance =row[7]
         self.FinalizationDate =row[8]
-        self.IsFinalize =row[9]
+        self.IsFinalized =row[9]
 
     def toDict(self):
         customertransactions = {
@@ -64,7 +64,7 @@ class CustomerTransactions(object):
             'TransactionAmount': self.TransactionAmount,
             'OutstandingBalance': self.OutstandingBalance,
             'FinalizationDate': self.FinalizationDate,
-            'IsFinalize': self.IsFinalize,
+            'IsFinalized': self.IsFinalized,
         }
         return customertransactions
 
@@ -75,10 +75,10 @@ class CustomerTransactions(object):
         return copy.deepcopy(self)
 
     def getNonKeyColumns():
-        return ["CustomerID", "InvoiceID", "TransactionDate", "AmountExcludingTax", "TaxAmount", "TransactionAmount","OutstandingBalance","FinalizationDate","IsFinalize"]
+        return ["CustomerID", "InvoiceID", "TransactionDate", "AmountExcludingTax", "TaxAmount", "TransactionAmount","OutstandingBalance","FinalizationDate","IsFinalized"]
 
     def getColumns():
-        return ["CustomerTransactionID","CustomerID", "InvoiceID", "TransactionDate", "AmountExcludingTax", "TaxAmount", "TransactionAmount","OutstandingBalance","FinalizationDate","IsFinalize"]
+        return ["CustomerTransactionID","CustomerID", "InvoiceID", "TransactionDate", "AmountExcludingTax", "TaxAmount", "TransactionAmount","OutstandingBalance","FinalizationDate","IsFinalized"]
 
 
 class InvoiceLines(object):

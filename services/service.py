@@ -7,7 +7,7 @@ class Service():
         self.table = table
         self.object_type = object_type
 
-    def get_data(self, page):
+    def get_data(self, page, sort_by=None):
         max_row = 1000
         row_num_query = 'SELECT COUNT("' + self.object_type.getColumns()[0] + '") FROM ' + self.table
 
@@ -112,7 +112,8 @@ class Service():
                 cursor = connection.cursor()
                 cursor.execute(query)
                 return True
-        except:
+        except Exception as e:
+            print(e)
             return False
 
     def search_and_list(self, dictionary):
