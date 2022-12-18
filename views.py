@@ -48,9 +48,12 @@ class Table():
             data = service.get_data()
             
             context = Context()
-            context.isEdit = True
-            context.selectedID = id
-            context.selectedIDColumn = idColumn
+            try:
+                context.isEdit = True
+                context.selectedID = int(id)
+                context.selectedIDColumn = idColumn
+            except:
+                pass
             return render_template("generic_list.html", title=self.type, table=data, context=context)
         else:
             row = []
@@ -81,9 +84,22 @@ class Table():
 
     def search(self):
         if request.method == "POST":
-            
+            form = {}
+
+            for column in self.data_class.getColumns():
+                if request.form[column] != "":
+                    form[column] = request.form[column]
+
             service = self.service()
-            search_data = service.search_and_list(request.form)
+            search_data = service.search_and_list(form)
+
+            if len(search_data) == 0:
+                row = []
+                for column in self.data_class.getColumns():
+                    row.append("")
+                data = self.data_class(row)
+                search_data.append(data)
+
             return render_template("generic_list.html", title=self.type, table=search_data, context=Context())
 
         
@@ -108,6 +124,14 @@ class OrdersTable(Table):
 class CustomerTransactionsTable(Table):
     def __init__(self):
         super().__init__("CustomerTransactions", CustomerTransactionService, CustomerTransactions)
+
+class OrderLinesTable(Table):
+    def __init__(self):
+        super().__init__("OrderLines", OrderLineService, OrderLines)
+
+class PeopleTable(Table):
+    def __init__(self):
+        super().__init__("People", PeopleService, People)
 
 def home_page():
     return render_template("home.html")        
