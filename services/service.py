@@ -32,15 +32,13 @@ class Service():
 
                 query += " LIMIT " + str(max_row) + " OFFSET " + str((page-1)*max_row)
 
-                print(query)
-
                 res = cursor.execute(query)
                 for row in res:
                     new_object = self.object_type(row)
                     object_list.append(new_object)
                 return object_list
         except Exception as e:
-            print(e)
+            # print(e)
             return []
 
     def get_rows_by_column(self, id, column):
@@ -110,7 +108,6 @@ class Service():
         flag = False
         for i,column in enumerate(columns):
             if column in self.object_type.getNonKeyColumns() and dict_data[column] != "":
-                print(dict_data[column])
                 flag = True
                 query += column + '="' + dict_data[column] + '"'
                 if i != len(columns)-1:
@@ -123,15 +120,13 @@ class Service():
         if not flag:
             return True
 
-        print(query)
-
         try:
             with sqlite3.connect(current_app.config["dbname"]) as connection:
                 cursor = connection.cursor()
                 cursor.execute(query)
                 return True
         except Exception as e:
-            print(e)
+            # print(e)
             return False
 
     def search_and_list(self, dictionary):
@@ -141,7 +136,6 @@ class Service():
 
         for i, key in enumerate(dictionary):
             if dictionary[key].isnumeric():
-                print(dictionary[key])
                 query += key + "=" + dictionary[key]
             else:
                 query += key + " LIKE " + '"%' + dictionary[key] + '%"'
@@ -149,8 +143,6 @@ class Service():
                 query += ") AND ("
 
         query += "))"
-
-        print(query)
 
         object_list = []
 
