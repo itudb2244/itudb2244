@@ -8,7 +8,7 @@
       <a style="color:white; text-decoration: none; position: relative;"
         href="{{url_for(title + '_page', page=context.page-1)}}">
         <img class=" mx-2" src="/static/previous.png" style="width:18px;height:18px;">
-      </a>
+      </a>{{context.page}}
       <a style="color:white; text-decoration: none; position: relative;"
         href="{{url_for(title + '_page', page=context.page+1)}}">
         <img class=" mx-2" src="/static/next.png" style="width:18px;height:18px;">
