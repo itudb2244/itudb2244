@@ -49,9 +49,9 @@ class Table():
             
             context = Context()
             context.isEdit = True
-            context.selectedID = id
+            context.selectedID = int(id)
             context.selectedIDColumn = idColumn
-            return render_template("generic_list.html", title=self.type, table=data, context=context)
+            return redirect(url_for(self.type + "_get#"+ str(id)), context=context )
         else:
             row = []
             columns = self.data_class.getColumns()
@@ -65,7 +65,7 @@ class Table():
 
             service = self.service()
             service.update_row(obj, id, idColumn)
-            return redirect(url_for(self.type + "_page"))
+            return redirect(url_for(self.type + "_page") )
 
     def delete_row(self):
         idString = request.args.get("delete_id")
@@ -85,6 +85,9 @@ class Table():
             service = self.service()
             search_data = service.search_and_list(request.form)
             return render_template("generic_list.html", title=self.type, table=search_data, context=Context())
+
+    def get_table_goto_row(self, id):
+        return render_template("generic_list.html", title=self.type, table=self.service().get_data(), context=context)
 
         
 

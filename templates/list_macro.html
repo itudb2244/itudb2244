@@ -3,7 +3,6 @@
   <thead>
     <th scope="column"> </th>
     <th scope="column"> </th>
-
     {% for keys in table_object[0].__dict__.keys() %}
     <th scope="column">{{ keys }}</th>
     {% endfor %}
@@ -82,7 +81,10 @@
       {%else %}
 
       {% for key in iter.__dict__.keys() %}
-      <td style="vertical-align: middle;">{{ iter[key] }}</td>
+        {% if loop.index == 1 %}
+        {% set object_id = iter[key] %}
+        {% endif %}
+      <td style="vertical-align: middle;" id="{{object_id}}">{{ iter[key] }}</td>
       {% endfor %}
       {% endif %}
     </tr>
