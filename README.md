@@ -4,6 +4,15 @@
 
 `python3 server.py`
 
+# Database Creation
+Running import_tables.sh will read the csv files at Tables/ and create import_test.db file at project root directory.
+
+`./import_tables.sh`
+
+CSV files at Tables/ directory are distilled versions of csv's at Tables/full_backup directory. To remove elements drop_unnecessary.sql is run . To remove elements drop_unnecessary.sql is run on. To reset csv's that the database uses run:
+
+`./import_bulk.sh`
+
 # Architecture
 ## Service
 SQL query generators reside in service.py which can be inherited by any table service class. Add, Update, Delete and Get methods of the parent class Service can be inherited by each table. They use objects in models to get information about columns. 
@@ -18,16 +27,6 @@ Jinja templates are in templates/ directory. Jinja macro list_macro.html is resp
 ## Tables
 CSV files are stored in Tables/ to have common source of data at database creation.
 
-# Database Creation
-Running import_tables.sh will read the csv files at Tables/ and create import_test.db file at project root directory.
 
-`./import_tables.sh`
-
-CSV files at Tables/ directory are distilled versions of csv's at Tables/full_backup directory. To remove elements drop_unnecessary.sql is run . To remove elements drop_unnecessary.sql is run on. To reset csv's that the database uses run:
-
-`./import_bulk.sh`
-
-
-Files with .db and .sqlite will stay at local and not sync with git.
 
 
