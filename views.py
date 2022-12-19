@@ -16,6 +16,7 @@ class Table():
         self.service = service
         self.data_class = data_class
         self.page = 1
+        self.sort_by = None
 
     def get_table(self, page):
         service = self.service()
@@ -23,9 +24,9 @@ class Table():
         if page <= 0:
             return redirect(url_for(self.type+"_page", page=1))
 
-        sort_by = request.args.get("sortby")
+        self.sort_by = request.args.get("sortby")
 
-        data = service.get_data(page, sort_by)
+        data = service.get_data(page, self.sort_by)
 
         self.page = page
         context = Context()
@@ -57,7 +58,7 @@ class Table():
         
         if request.method == "GET":
             service = self.service()
-            data = service.get_data(self.page)
+            data = service.get_data(self.page, self.sort_by)
             
             context = Context()
             try:
