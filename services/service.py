@@ -25,7 +25,14 @@ class Service():
                 if page > num // max_row:
                     page = num // max_row + 1
 
-                query = 'SELECT * FROM ' + self.table + " LIMIT " + str(max_row) + " OFFSET " + str((page-1)*max_row)
+                query = 'SELECT * FROM ' + self.table
+
+                if sort_by is not None:
+                    query += " ORDER BY "+sort_by+" ASC"
+
+                query += " LIMIT " + str(max_row) + " OFFSET " + str((page-1)*max_row)
+
+                print(query)
 
                 res = cursor.execute(query)
                 for row in res:
