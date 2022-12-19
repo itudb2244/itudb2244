@@ -4,18 +4,18 @@
 
 `python3 server.py`
 
-#Architecture
-##Service
+# Architecture
+## Service
 SQL query generators reside in service.py which can be inherited by any table service class. Add, Update, Delete and Get methods of the parent class Service can be inherited by each table. They use objects in models to get information about columns. 
-##Models
+## Models
 Tables' columns are stored in models.py as reference. It is used by services to generate queries. 
-##Server
+## Server
 Url endpoints are declared in server.py. It is responsible to run the server. View functions are assigned to urls.
-##Views
+## Views
 View functions are declared in views.py. It is responsible for connecting services with appropriate url's and template files which create html.
-##Templates
+## Templates
 Jinja templates are in templates/ directory. Jinja macro list_macro.html is responsible of serving appropriate html file depending on the context and data. 
-##Tables
+## Tables
 CSV files are stored in Tables/ to have common source of data at database creation.
 
 # Database Creation
