@@ -107,12 +107,23 @@ class Service():
         query = "UPDATE "+self.table+" SET "
 
         columns = self.object_type.getColumns()
+        flag = False
         for i,column in enumerate(columns):
-            if column in self.object_type.getNonKeyColumns():
+            if column in self.object_type.getNonKeyColumns() and dict_data[column] != "":
+                print(dict_data[column])
+                flag = True
                 query += column + '="' + dict_data[column] + '"'
                 if i != len(columns)-1:
                     query += ", "
+
+        if query[-2] == ",":
+            query = query[:-2]
         query += " WHERE (" + idColumn + " = " + str(id) + ")"
+
+        if not flag:
+            return True
+
+        print(query)
 
         try:
             with sqlite3.connect(current_app.config["dbname"]) as connection:
