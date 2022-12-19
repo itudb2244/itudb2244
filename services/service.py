@@ -8,6 +8,7 @@ class Service():
         self.object_type = object_type
 
     def get_data(self):
+        #SELECT * FROM Customers
         query = 'SELECT * FROM ' + self.table
         object_list = []
 
@@ -23,6 +24,7 @@ class Service():
             return False
 
     def get_rows_by_column(self, id, column):
+
         query = 'SELECT * FROM '+self.table+' WHERE('+self.table+'.'+column+' = {})'.format(id)
         object_list = []
         
@@ -39,7 +41,7 @@ class Service():
 
     def add_row(self, obj):
         columns = self.object_type.getNonKeyColumns()
-
+        #INSERT INTO Customers(CustomerName, PrimaryContactPersonID...) VALUES("Esat", "12345"...)
         query = 'INSERT INTO '+self.table+'('
         for i,column in enumerate(columns):
             query += column
@@ -68,6 +70,8 @@ class Service():
             return False
 
     def delete_row(self, id, idColumn):
+
+        # "DELETE FROM Customers WHERE("CustomerID" = "3" )"
         query = "DELETE FROM "+self.table+" WHERE("+idColumn+" = "+str(id)+")"
 
         try:
