@@ -1,5 +1,4 @@
 from flask import current_app, render_template, request, redirect, url_for
-import services.customer_service as customerService
 
 from services.service import *
 
