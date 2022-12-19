@@ -1,7 +1,7 @@
 from flask import current_app, render_template, request, redirect, url_for
 
 from services.service import *
-
+# Context Class holds the context of the application
 class Context():
     def __init__(self):
         self.isEdit = False
@@ -9,6 +9,7 @@ class Context():
         self.selectedIDColumn = 0
         self.page = 1
 
+#Table class is the parent class for all the tables
 class Table():
     def __init__(self, type, service, data_class):
         self.type = type

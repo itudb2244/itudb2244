@@ -1,7 +1,7 @@
 from flask import current_app, redirect, url_for, request
 import sqlite3
 from models import *
-
+# The parent service class which all the services inherit from
 class Service():
     def __init__(self, table, object_type):
         self.table = table

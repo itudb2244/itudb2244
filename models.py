@@ -1,5 +1,5 @@
 import copy
-
+# object representations of table columns are used as reference
 class Customer(object):
     def __init__(self, row):
         self.CustomerID = row[0]

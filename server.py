@@ -2,7 +2,7 @@ from flask import Flask
 import views
 from subprocess import call
 import db_updated_check
-
+#url rules created for each table
 def create_app():
     app = Flask(__name__)
     app.config.from_object("settings")
