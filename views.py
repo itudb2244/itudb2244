@@ -1,5 +1,4 @@
 from flask import current_app, render_template, request, redirect, url_for
-import services.customer_service as customerService
 
 from services.service import *
 
@@ -8,18 +7,31 @@ class Context():
         self.isEdit = False
         self.selectedID = 0
         self.selectedIDColumn = 0
+        self.page = 1
 
 class Table():
     def __init__(self, type, service, data_class):
         self.type = type
         self.service = service
         self.data_class = data_class
-        #self.context = Context()
+        self.page = 1
+        self.sort_by = None
 
-    def get_table(self):
+    def get_table(self, page):
         service = self.service()
-        data = service.get_data()
-        return render_template("generic_list.html", title=self.type, table=data, context=Context())
+
+        if page <= 0:
+            return redirect(url_for(self.type+"_page", page=1))
+
+        self.sort_by = request.args.get("sortby")
+
+        data = service.get_data(page, self.sort_by)
+
+        self.page = page
+        context = Context()
+        context.page = self.page
+
+        return render_template("generic_list.html", title=self.type, table=data, context=context)
 
     def add_row(self):
         row = []
@@ -35,7 +47,7 @@ class Table():
         service = self.service()
         service.add_row(obj)
 
-        return redirect(url_for(self.type + "_page"))
+        return redirect(url_for(self.type + "_page", page=self.page))
 
     def update_row(self):
         idString = request.args.get("update_id")
@@ -45,13 +57,16 @@ class Table():
         
         if request.method == "GET":
             service = self.service()
-            data = service.get_data()
+            data = service.get_data(self.page, self.sort_by)
             
             context = Context()
-            context.isEdit = True
-            context.selectedID = int(id)
-            context.selectedIDColumn = idColumn
-            return redirect(url_for(self.type + "_get#"+ str(id)), context=context )
+            try:
+                context.isEdit = True
+                context.selectedID = int(id)
+                context.selectedIDColumn = idColumn
+            except:
+                pass
+            return render_template("generic_list.html", title=self.type, table=data, context=context)
         else:
             row = []
             columns = self.data_class.getColumns()
@@ -65,7 +80,7 @@ class Table():
 
             service = self.service()
             service.update_row(obj, id, idColumn)
-            return redirect(url_for(self.type + "_page") )
+            return redirect(url_for(self.type + "_page", page=self.page))
 
     def delete_row(self):
         idString = request.args.get("delete_id")
@@ -77,13 +92,26 @@ class Table():
         service = self.service()
         service.delete_row(id, idColumn)
 
-        return redirect(url_for(self.type + "_page"))
+        return redirect(url_for(self.type + "_page", page=self.page))
 
     def search(self):
         if request.method == "POST":
-            
+            form = {}
+
+            for column in self.data_class.getColumns():
+                if request.form[column] != "":
+                    form[column] = request.form[column]
+
             service = self.service()
-            search_data = service.search_and_list(request.form)
+            search_data = service.search_and_list(form)
+
+            if len(search_data) == 0:
+                row = []
+                for column in self.data_class.getColumns():
+                    row.append("")
+                data = self.data_class(row)
+                search_data.append(data)
+
             return render_template("generic_list.html", title=self.type, table=search_data, context=Context())
 
     def get_table_goto_row(self, id):
@@ -95,7 +123,30 @@ class Table():
 class CustomerTable(Table):
     def __init__(self):
         super().__init__("Customers", CustomerService, Customer)
-        
+
+class InvoicesTable(Table):
+    def __init__(self):
+        super().__init__("Invoices", InvoiceService, Invoices)
+
+class InvoiceLinesTable(Table):
+    def __init__(self):
+        super().__init__("InvoiceLines", InvoiceLineService, InvoiceLines)
+           
+class OrdersTable(Table):
+    def __init__(self):
+        super().__init__("Orders", OrderService, Orders)
+
+class CustomerTransactionsTable(Table):
+    def __init__(self):
+        super().__init__("CustomerTransactions", CustomerTransactionService, CustomerTransactions)
+
+class OrderLinesTable(Table):
+    def __init__(self):
+        super().__init__("OrderLines", OrderLineService, OrderLines)
+
+class PeopleTable(Table):
+    def __init__(self):
+        super().__init__("People", PeopleService, People)
 
 def home_page():
     return render_template("home.html")        

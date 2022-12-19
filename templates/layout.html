@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
+    <link rel="icon" type="image/svg+xml" href="/static/itu.svg" />
     <title>Project - {% block title %}{% endblock %}</title>  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
@@ -19,13 +20,13 @@
         <div class="site-header__end">
           <nav class="nav">
             <ul class="nav__wrapper mt-3">
-              <li class="nav__item"><a href="#">People </a></li>
-              <li class="nav__item"><a href="{{url_for('Customers_page')}}">Customers </a></li> 
-              <li class="nav__item"><a href="#">Customer Transactions </a></li> 
-              <li class="nav__item"><a href="#">Orders </a></li>
-              <li class="nav__item"><a href="#">Order Lines </a></li>
-              <li class="nav__item"><a href="#">Invoices </a></li>
-              <li class="nav__item"><a href="#">Invoices Lines </a></li>
+              <li class="nav__item"><a href="{{url_for('People_page', page=1)}}">People </a></li>
+              <li class="nav__item"><a href="{{url_for('Customers_page', page=1)}}">Customers </a></li> 
+              <li class="nav__item"><a href="{{url_for('CustomerTransactions_page', page=1)}}">Customer Transactions </a></li> 
+              <li class="nav__item"><a href="{{url_for('Orders_page', page=1)}}">Orders </a></li>
+              <li class="nav__item"><a href="{{url_for('OrderLines_page', page=1)}}">Order Lines </a></li>
+              <li class="nav__item"><a href="{{url_for('Invoices_page', page=1)}}">Invoices </a></li>
+              <li class="nav__item"><a href="{{url_for('InvoiceLines_page', page=1)}}">Invoices Lines </a></li>
             </ul>
           </nav>
         </div>
