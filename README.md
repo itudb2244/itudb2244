@@ -28,5 +28,10 @@ Jinja templates are in templates/ directory. Jinja macro list_macro.html is resp
 CSV files are stored in Tables/ to have common source of data at database creation.
 
 
+Files with .db and .sqlite will stay at local and not sync with git.
 
+# Data Source
+A subset of Microsoft's World Wide Importers data was used. CSV's were extracted and placed in Tables directory. Below you can see the relationship diagram of the data used.
+![](diagram1.png)
+![](diagram2.png)
 
